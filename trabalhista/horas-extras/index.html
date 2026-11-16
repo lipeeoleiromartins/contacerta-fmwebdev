@@ -8,7 +8,7 @@
     </title>
     <meta
       name="description"
-      content="Calcule gratuitamente o valor das suas horas extras 50%, 100% e adicional noturno de acordo com a CLT. Uma ferramenta desenvolvida por FM WebDev."
+      content="Calcule o valor exato das suas horas extras 50%, 100% e adicional noturno de 20% com reflexo no DSR. Ferramenta gratuita por FM WebDev."
     />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
@@ -52,15 +52,9 @@
           Calculadora de Horas Extras e Adicional Noturno
         </h1>
         <p class="text-slate-600 mt-1 text-sm md:text-base">
-          Descubra exatamente quanto você deve receber pelas horas trabalhadas
-          além do expediente.
+          Simule o valor a receber por horas trabalhadas a mais (50% e 100%) e
+          turno noturno.
         </p>
-      </div>
-
-      <div
-        class="w-full bg-slate-200/60 border border-dashed border-slate-300 rounded-lg p-3 text-center text-xs text-slate-400 mb-6"
-      >
-        Espaço reservado para anúncio (Google AdSense)
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
@@ -68,42 +62,42 @@
           class="md:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200"
         >
           <form id="form-horas-extras" class="space-y-4">
-            <div>
-              <label
-                for="salario"
-                class="block text-sm font-semibold text-slate-700 mb-1"
-                >Salário Bruto Mensal (R$)</label
-              >
-              <input
-                type="text"
-                id="salario"
-                inputmode="numeric"
-                placeholder="Ex: 2.500,00"
-                required
-                class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"
-              />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="salario"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Salário Bruto Mensal (R$)</label
+                >
+                <input
+                  type="text"
+                  id="salario"
+                  inputmode="numeric"
+                  placeholder="Ex: 2.500,00"
+                  required
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="jornada"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Carga Horária Mensal</label
+                >
+                <select
+                  id="jornada"
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-600 outline-none"
+                >
+                  <option value="220" selected>220 horas (44h semanais)</option>
+                  <option value="200">200 horas (40h semanais)</option>
+                  <option value="180">180 horas (36h / 12x36)</option>
+                  <option value="150">150 horas (30h semanais)</option>
+                </select>
+              </div>
             </div>
 
-            <div>
-              <label
-                for="carga-horaria"
-                class="block text-sm font-semibold text-slate-700 mb-1"
-                >Carga Horária Mensal</label
-              >
-              <select
-                id="carga-horaria"
-                class="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-600 outline-none"
-              >
-                <option value="220" selected>
-                  220 horas (44h semanais - Padrão CLT)
-                </option>
-                <option value="200">200 horas (40h semanais)</option>
-                <option value="180">180 horas (36h semanais / Turno 6h)</option>
-                <option value="150">150 horas (30h semanais)</option>
-              </select>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label
                   for="horas-50"
@@ -113,13 +107,12 @@
                 <input
                   type="number"
                   id="horas-50"
-                  step="0.1"
-                  placeholder="0"
+                  min="0"
+                  step="0.5"
+                  value="0"
                   class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
                 />
-                <span class="text-[11px] text-slate-400">Dias úteis</span>
               </div>
-
               <div>
                 <label
                   for="horas-100"
@@ -129,31 +122,26 @@
                 <input
                   type="number"
                   id="horas-100"
-                  step="0.1"
-                  placeholder="0"
+                  min="0"
+                  step="0.5"
+                  value="0"
                   class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
                 />
-                <span class="text-[11px] text-slate-400"
-                  >Domingos/Feriados</span
-                >
               </div>
-
               <div>
                 <label
                   for="horas-noturnas"
                   class="block text-xs font-semibold text-slate-700 mb-1"
-                  >Horas Noturnas</label
+                  >Horas Noturnas (20%)</label
                 >
                 <input
                   type="number"
                   id="horas-noturnas"
-                  step="0.1"
-                  placeholder="0"
+                  min="0"
+                  step="0.5"
+                  value="0"
                   class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
                 />
-                <span class="text-[11px] text-slate-400"
-                  >22h às 05h (+20%)</span
-                >
               </div>
             </div>
 
@@ -179,33 +167,33 @@
             class="hidden mt-6 pt-6 border-t border-slate-200"
           >
             <h2 class="text-lg font-bold text-slate-800 mb-3">
-              Detalhamento do Cálculo
+              Detalhamento dos Valores
             </h2>
 
             <div
               class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200"
             >
               <div class="flex justify-between">
-                <span class="text-slate-600">Valor da sua hora normal:</span>
-                <span id="res-hora-normal" class="font-semibold">R$ 0,00</span>
+                <span class="text-slate-600">Valor da Hora Normal:</span>
+                <span id="res-hora-normal" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
               </div>
               <div class="flex justify-between">
                 <span class="text-slate-600">Total Horas Extras 50%:</span>
-                <span id="res-total-50" class="font-semibold text-blue-700"
+                <span id="res-50" class="font-semibold text-slate-900"
                   >R$ 0,00</span
                 >
               </div>
               <div class="flex justify-between">
                 <span class="text-slate-600">Total Horas Extras 100%:</span>
-                <span id="res-total-100" class="font-semibold text-blue-700"
+                <span id="res-100" class="font-semibold text-slate-900"
                   >R$ 0,00</span
                 >
               </div>
               <div class="flex justify-between">
-                <span class="text-slate-600"
-                  >Total Adicional Noturno (20%):</span
-                >
-                <span id="res-total-noturno" class="font-semibold text-blue-700"
+                <span class="text-slate-600">Adicional Noturno (20%):</span>
+                <span id="res-noturno" class="font-semibold text-slate-900"
                   >R$ 0,00</span
                 >
               </div>
@@ -215,9 +203,7 @@
                 <span class="font-bold text-slate-900"
                   >Total Bruto a Receber:</span
                 >
-                <span
-                  id="res-total-geral"
-                  class="font-extrabold text-emerald-600"
+                <span id="res-total" class="font-extrabold text-emerald-600"
                   >R$ 0,00</span
                 >
               </div>
@@ -237,7 +223,7 @@
             id="historico-recente"
             class="mt-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200"
           >
-            <!-- Preenchido automaticamente via JS -->
+            <!-- Preenchido via JavaScript -->
           </div>
         </div>
 
@@ -261,9 +247,9 @@
               </li>
               <li>
                 <a
-                  href="../rescisao-clt/index.html"
+                  href="../ferias-proporcionais/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between"
-                  ><span>→ Calculadora de Rescisão CLT</span
+                  ><span>→ Calculadora de Férias</span
                   ><span class="text-xs text-emerald-600 font-medium"
                     >Ativa</span
                   ></a
@@ -271,9 +257,9 @@
               </li>
               <li>
                 <a
-                  href="../ferias-proporcionais/index.html"
+                  href="../rescisao-clt/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between"
-                  ><span>→ Calculadora de Férias</span
+                  ><span>→ Calculadora de Rescisão CLT</span
                   ><span class="text-xs text-emerald-600 font-medium"
                     >Ativa</span
                   ></a
@@ -291,12 +277,6 @@
               </li>
             </ul>
           </div>
-
-          <div
-            class="bg-slate-200/60 border border-dashed border-slate-300 rounded-xl h-60 flex items-center justify-center text-xs text-slate-400 p-4 text-center"
-          >
-            Espaço reservado para anúncio lateral (300x250)
-          </div>
         </aside>
       </div>
 
@@ -305,14 +285,14 @@
         class="mt-12 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
       >
         <h2 class="text-xl font-bold text-slate-900 mb-3">
-          Como calcular hora extra na CLT?
+          Como calcular Horas Extras e Adicional Noturno?
         </h2>
         <p class="text-slate-600 text-sm leading-relaxed mb-4">
-          De acordo com a Consolidação das Leis do Trabalho (CLT), toda hora
-          trabalhada além da jornada contratual deve ser remunerada com um
-          acréscimo mínimo de
-          <strong>50% sobre o valor da hora normal</strong> em dias úteis, e
-          <strong>100% em domingos e feriados</strong>.
+          Para descobrir o valor da sua hora normal, divide-se o salário bruto
+          mensal pela carga horária mensal (geralmente 220 horas). Sobre o valor
+          da hora normal, aplica-se o acréscimo de <strong>50%</strong> para
+          dias úteis e sábados, ou <strong>100%</strong> para domingos e
+          feriados.
         </p>
       </article>
     </main>
