@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (typeof atualizarExibicaoHistorico === "function") {
     atualizarExibicaoHistorico();
   }
-  inicializarDarkMode();
+  inserirBreadcrumbs();
 });
 
 function criarBannerCookies() {
@@ -68,13 +68,13 @@ function atualizarExibicaoHistorico() {
   }
 
   let html =
-    '<h4 class="font-bold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Suas Últimas Simulações</h4><ul class="space-y-2 text-xs">';
+    '<h4 class="font-bold text-xs text-slate-700 uppercase tracking-wider mb-2">Suas Últimas Simulações</h4><ul class="space-y-2 text-xs">';
   historico.forEach((item) => {
     html += `
-            <li class="bg-slate-50 dark:bg-slate-800 p-2.5 rounded border border-slate-200 dark:border-slate-700 flex justify-between items-center">
+            <li class="bg-slate-50 p-2.5 rounded border border-slate-200 flex justify-between items-center">
                 <div>
-                    <span class="font-semibold text-blue-700 dark:text-blue-400">${item.ferramenta}</span>
-                    <p class="text-slate-600 dark:text-slate-300 font-medium mt-0.5">${item.resumo}</p>
+                    <span class="font-semibold text-blue-700">${item.ferramenta}</span>
+                    <p class="text-slate-600 font-medium mt-0.5">${item.resumo}</p>
                 </div>
                 <span class="text-[10px] text-slate-400">${item.data}</span>
             </li>
@@ -84,47 +84,48 @@ function atualizarExibicaoHistorico() {
   container.innerHTML = html;
 }
 
-// --- 3. MODO ESCURO (DARK MODE) ---
-function inicializarDarkMode() {
-  // Cria o botão de alternância de tema no header se ele ainda não existir
-  const headerNav = document.querySelector("header nav");
-  if (headerNav && !document.getElementById("btn-dark-mode")) {
-    const btnDark = document.createElement("button");
-    btnDark.id = "btn-dark-mode";
-    btnDark.className =
-      "bg-blue-800/60 hover:bg-blue-800 text-white text-xs font-medium px-3 py-1.5 rounded transition flex items-center gap-1.5 cursor-pointer";
-    btnDark.innerHTML = `<span id="icone-tema">🌙</span> <span class="hidden sm:inline">Tema</span>`;
-    btnDark.onclick = alternarDarkMode;
-    headerNav.appendChild(btnDark);
+// --- 3. BREADCRUMBS (TRILHA DE NAVEGAÇÃO SEO) ---
+function inserirBreadcrumbs() {
+  const caminho = window.location.pathname;
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const rotas = {
+    "horas-extras": {
+      categoria: "Trabalhista",
+      nome: "Horas Extras e Noturno",
+    },
+    "salario-liquido": { categoria: "Financeiro", nome: "Salário Líquido" },
+    "ferias-proporcionais": {
+      categoria: "Trabalhista",
+      nome: "Férias Proporcionais",
+    },
+    "rescisao-clt": { categoria: "Trabalhista", nome: "Rescisão CLT" },
+    "decimo-terceiro": { categoria: "Trabalhista", nome: "13º Salário" },
+  };
+
+  let paginaAtual = null;
+  for (const chave in rotas) {
+    if (caminho.includes(chave)) {
+      paginaAtual = rotas[chave];
+      break;
+    }
   }
 
-  // Aplica o tema salvo no localStorage
-  const temaSalvo = localStorage.getItem("contacerta_tema");
-  if (temaSalvo === "dark") {
-    document.documentElement.classList.add("dark");
-    atualizarIconeTema("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-    atualizarIconeTema("light");
-  }
-}
+  // Só insere se estiver em uma das 5 calculadoras
+  if (!paginaAtual) return;
 
-function alternarDarkMode() {
-  const htmlEl = document.documentElement;
-  if (htmlEl.classList.contains("dark")) {
-    htmlEl.classList.remove("dark");
-    localStorage.setItem("contacerta_tema", "light");
-    atualizarIconeTema("light");
-  } else {
-    htmlEl.classList.add("dark");
-    localStorage.setItem("contacerta_tema", "dark");
-    atualizarIconeTema("dark");
-  }
-}
+  const nav = document.createElement("nav");
+  nav.setAttribute("aria-label", "Breadcrumb");
+  nav.className =
+    "text-xs text-slate-500 mb-4 flex items-center flex-wrap gap-1.5";
+  nav.innerHTML = `
+        <a href="../../index.html" class="hover:text-blue-700 hover:underline transition">Início</a>
+        <span>/</span>
+        <span>${paginaAtual.categoria}</span>
+        <span>/</span>
+        <span class="font-semibold text-slate-700">${paginaAtual.nome}</span>
+    `;
 
-function atualizarIconeTema(modo) {
-  const icone = document.getElementById("icone-tema");
-  if (icone) {
-    icone.textContent = modo === "dark" ? "☀️" : "🌙";
-  }
+  main.insertBefore(nav, main.firstChild);
 }
