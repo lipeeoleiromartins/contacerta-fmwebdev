@@ -1,25 +1,28 @@
 // Máscara de moeda brasileira
 const inputSalario = document.getElementById("salario");
 
-inputSalario.addEventListener("input", function (e) {
-  let valor = e.target.value.replace(/\D/g, "");
-  if (valor === "") {
-    e.target.value = "";
-    return;
-  }
-  valor = (parseInt(valor, 10) / 100).toFixed(2);
-  valor = valor.replace(".", ",");
-  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  e.target.value = valor;
-});
+if (inputSalario) {
+  inputSalario.addEventListener("input", function (e) {
+    let valor = e.target.value.replace(/\D/g, "");
+    if (valor === "") {
+      e.target.value = "";
+      return;
+    }
+    valor = (parseInt(valor, 10) / 100).toFixed(2);
+    valor = valor.replace(".", ",");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    e.target.value = valor;
+  });
+}
 
 function lerMoeda(texto) {
   if (!texto) return 0;
   return parseFloat(texto.replace(/\./g, "").replace(",", ".")) || 0;
 }
 
-// Cálculo Progressivo do INSS (incide sobre férias + 1/3, exceto abono pecuniário)
+// Cálculo progressivo do INSS
 function calcularINSS(baseCalculo) {
+  if (baseCalculo <= 0) return 0;
   let inss = 0;
   const faixas = [
     { limite: 1518.0, aliquota: 0.075 },
@@ -41,8 +44,9 @@ function calcularINSS(baseCalculo) {
   return inss;
 }
 
-// Cálculo do IRRF sobre férias
+// Cálculo do IRRF
 function calcularIRRF(baseTributavel, inss, dependentes) {
+  if (baseTributavel <= 0) return 0;
   const deducaoPorDependente = 189.59;
   const deducoesLegais = inss + dependentes * deducaoPorDependente;
   const descontoSimplificado = 607.2;
@@ -57,92 +61,95 @@ function calcularIRRF(baseTributavel, inss, dependentes) {
   return baseCalculo * 0.275 - 908.73;
 }
 
-document.getElementById("form-ferias").addEventListener("submit", function (e) {
-  e.preventDefault();
+const formFerias = document.getElementById("form-ferias");
+if (formFerias) {
+  formFerias.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const salarioBruto = lerMoeda(document.getElementById("salario").value);
-  const mesesTrabalhados =
-    parseInt(document.getElementById("meses").value, 10) || 12;
-  const dependentes =
-    parseInt(document.getElementById("dependentes").value, 10) || 0;
-  const venderFerias = document.getElementById("vender-ferias").checked;
-  const adiantar13 = document.getElementById("adiantar-13").checked;
+    const salarioBruto = lerMoeda(document.getElementById("salario").value);
+    const meses = parseInt(document.getElementById("meses").value, 10) || 12;
+    const diasAbono = parseInt(document.getElementById("abono").value, 10) || 0;
+    const dependentes =
+      parseInt(document.getElementById("dependentes").value, 10) || 0;
 
-  if (salarioBruto <= 0) {
-    alert("Por favor, informe um salário bruto válido.");
-    return;
-  }
+    if (salarioBruto <= 0) {
+      alert("Por favor, informe um salário bruto válido.");
+      return;
+    }
 
-  // 1. Valor base das férias proporcionais aos meses (12 meses = salário integral)
-  const valorFeriasBase = (salarioBruto / 12) * mesesTrabalhados;
+    // 1. Valor base proporcional das férias
+    const valorFeriasProp = (salarioBruto / 12) * meses;
+    // 2. Terço constitucional (1/3)
+    const tercoConstitucional = valorFeriasProp / 3;
+    const totalBrutoFerias = valorFeriasProp + tercoConstitucional;
 
-  // Se vender 1/3 (abono pecuniário), 2/3 são gozados e 1/3 é vendido (isento de INSS/IR)
-  const feriasGozadas = venderFerias
-    ? valorFeriasBase * (2 / 3)
-    : valorFeriasBase;
-  const tercoConstitucional = feriasGozadas / 3;
+    // 3. Abono pecuniário (venda de dias), se houver (já inclui o 1/3 proporcional)
+    let valorAbono = 0;
+    let tercoAbono = 0;
+    let totalBrutoAbono = 0;
+    if (diasAbono > 0) {
+      valorAbono = (salarioBruto / 30) * diasAbono;
+      tercoAbono = valorAbono / 3;
+      totalBrutoAbono = valorAbono + tercoAbono;
+    }
 
-  // Abono pecuniário (venda de 1/3 das férias + 1/3 sobre o abono)
-  const abonoPecuniario = venderFerias ? valorFeriasBase / 3 : 0;
-  const tercoAbono = venderFerias ? abonoPecuniario / 3 : 0;
-  const totalAbono = abonoPecuniario + tercoAbono;
+    const brutoGeral = totalBrutoFerias + totalBrutoAbono;
 
-  // Adiantamento 1ª parcela 13º (50% do salário bruto, sem descontos)
-  const adiantamento13 = adiantar13 ? salarioBruto * 0.5 : 0;
+    // 4. Descontos oficiais (INSS e IRRF incidem sobre as férias normais + 1/3, o abono é isento)
+    const baseTributavel = totalBrutoFerias;
+    const descontoINSS = calcularINSS(baseTributavel);
+    const descontoIRRF = Math.max(
+      0,
+      calcularIRRF(baseTributavel, descontoINSS, dependentes),
+    );
+    const totalDescontos = descontoINSS + descontoIRRF;
 
-  // 2. Descontos (incidem apenas sobre férias gozadas + 1/3)
-  const baseTributavel = feriasGozadas + tercoConstitucional;
-  const descontoINSS = calcularINSS(baseTributavel);
-  const descontoIRRF = Math.max(
-    0,
-    calcularIRRF(baseTributavel, descontoINSS, dependentes),
-  );
+    // 5. Líquido final
+    const valorLiquido = Math.max(0, brutoGeral - totalDescontos);
 
-  // 3. Total Líquido
-  const totalProventos = baseTributavel + totalAbono + adiantamento13;
-  const totalLiquido = Math.max(
-    0,
-    totalProventos - descontoINSS - descontoIRRF,
-  );
+    const formatarMoeda = (valor) =>
+      valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-  const formatarMoeda = (valor) => {
-    return valor.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-  };
+    document.getElementById("res-ferias").textContent =
+      formatarMoeda(valorFeriasProp);
+    document.getElementById("res-terco").textContent =
+      formatarMoeda(tercoConstitucional);
+    document.getElementById("res-abono").textContent =
+      formatarMoeda(totalBrutoAbono);
+    document.getElementById("res-inss").textContent =
+      `- ${formatarMoeda(descontoINSS)}`;
+    document.getElementById("res-irrf").textContent =
+      `- ${formatarMoeda(descontoIRRF)}`;
+    document.getElementById("res-liquido").textContent =
+      formatarMoeda(valorLiquido);
 
-  // 4. Exibir na tela
-  document.getElementById("res-ferias-base").textContent =
-    formatarMoeda(feriasGozadas);
-  document.getElementById("res-terco").textContent =
-    formatarMoeda(tercoConstitucional);
-  document.getElementById("res-abono").textContent = formatarMoeda(totalAbono);
-  document.getElementById("res-13").textContent = formatarMoeda(adiantamento13);
-  document.getElementById("res-inss").textContent =
-    `- ${formatarMoeda(descontoINSS)}`;
-  document.getElementById("res-irrf").textContent =
-    `- ${formatarMoeda(descontoIRRF)}`;
-  document.getElementById("res-liquido").textContent =
-    formatarMoeda(totalLiquido);
+    const cardResultado = document.getElementById("card-resultado");
+    cardResultado.classList.remove("hidden");
+    cardResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
-  const cardResultado = document.getElementById("card-resultado");
-  cardResultado.classList.remove("hidden");
-  cardResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
-});
+    // Salva no histórico local
+    if (typeof salvarNoHistorico === "function") {
+      salvarNoHistorico(
+        "Férias Proporcionais",
+        `Líquido: ${formatarMoeda(valorLiquido)}`,
+      );
+    }
+  });
+}
 
 function copiarResumo() {
-  const ferias = document.getElementById("res-ferias-base").textContent;
-  const terco = document.getElementById("res-terco").textContent;
-  const abono = document.getElementById("res-abono").textContent;
   const liquido = document.getElementById("res-liquido").textContent;
-
-  const texto = `🏖️ *Simulação de Férias (ContaCerta - FM WebDev)*\n• Férias: ${ferias}\n• Adicional 1/3: ${terco}\n• Abono Pecuniário (Venda): ${abono}\n✅ *Total Líquido a Receber: ${liquido}*`;
+  const texto = `🌴 *Cálculo de Férias (ContaCerta - FM WebDev)*\n✅ *Valor Líquido a Receber: ${liquido}*`;
 
   navigator.clipboard.writeText(texto).then(() => {
     const btn = document.getElementById("btn-copiar");
-    const textoOriginal = btn.textContent;
+    const original = btn.textContent;
     btn.textContent = "Copiado! ✓";
-    setTimeout(() => (btn.textContent = textoOriginal), 2000);
+    setTimeout(() => (btn.textContent = original), 2000);
   });
+}
+
+function limparFormulario() {
+  document.getElementById("form-ferias").reset();
+  document.getElementById("card-resultado").classList.add("hidden");
 }

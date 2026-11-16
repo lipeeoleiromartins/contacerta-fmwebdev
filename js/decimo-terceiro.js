@@ -1,25 +1,27 @@
-// Máscara de moeda brasileira
 const inputSalario = document.getElementById("salario");
 
-inputSalario.addEventListener("input", function (e) {
-  let valor = e.target.value.replace(/\D/g, "");
-  if (valor === "") {
-    e.target.value = "";
-    return;
-  }
-  valor = (parseInt(valor, 10) / 100).toFixed(2);
-  valor = valor.replace(".", ",");
-  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  e.target.value = valor;
-});
+if (inputSalario) {
+  inputSalario.addEventListener("input", function (e) {
+    let valor = e.target.value.replace(/\D/g, "");
+    if (valor === "") {
+      e.target.value = "";
+      return;
+    }
+    valor = (parseInt(valor, 10) / 100).toFixed(2);
+    valor = valor.replace(".", ",");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    e.target.value = valor;
+  });
+}
 
 function lerMoeda(texto) {
   if (!texto) return 0;
   return parseFloat(texto.replace(/\./g, "").replace(",", ".")) || 0;
 }
 
-function calcularINSS(baseCalculo) {
-  if (baseCalculo <= 0) return 0;
+// Cálculo do INSS
+function calcularINSS(base) {
+  if (base <= 0) return 0;
   let inss = 0;
   const faixas = [
     { limite: 1518.0, aliquota: 0.075 },
@@ -30,8 +32,8 @@ function calcularINSS(baseCalculo) {
 
   let faixaAnterior = 0;
   for (let i = 0; i < faixas.length; i++) {
-    if (baseCalculo > faixaAnterior) {
-      const baseFaixa = Math.min(baseCalculo, faixas[i].limite) - faixaAnterior;
+    if (base > faixaAnterior) {
+      const baseFaixa = Math.min(base, faixas[i].limite) - faixaAnterior;
       inss += baseFaixa * faixas[i].aliquota;
       faixaAnterior = faixas[i].limite;
     } else {
@@ -41,95 +43,81 @@ function calcularINSS(baseCalculo) {
   return inss;
 }
 
-function calcularIRRF(baseTributavel, inss, dependentes) {
-  if (baseTributavel <= 0) return 0;
-  const deducaoPorDependente = 189.59;
-  const deducoesLegais = inss + dependentes * deducaoPorDependente;
-  const descontoSimplificado = 607.2;
-
-  const deducaoAplicada = Math.max(deducoesLegais, descontoSimplificado);
-  const baseCalculo = baseTributavel - deducaoAplicada;
-
-  if (baseCalculo <= 2428.8) return 0;
-  if (baseCalculo <= 2826.65) return baseCalculo * 0.075 - 182.16;
-  if (baseCalculo <= 3751.05) return baseCalculo * 0.15 - 394.16;
-  if (baseCalculo <= 4664.68) return baseCalculo * 0.225 - 675.49;
-  return baseCalculo * 0.275 - 908.73;
-}
-
-document
-  .getElementById("form-decimo-terceiro")
-  .addEventListener("submit", function (e) {
+const formDecimo = document.getElementById("form-decimo");
+if (formDecimo) {
+  formDecimo.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const salarioBruto = lerMoeda(document.getElementById("salario").value);
-    const mesesTrabalhados =
-      parseInt(document.getElementById("meses").value, 10) || 12;
-    const dependentes =
-      parseInt(document.getElementById("dependentes").value, 10) || 0;
+    const meses = parseInt(document.getElementById("meses").value, 10) || 12;
 
     if (salarioBruto <= 0) {
       alert("Por favor, informe um salário bruto válido.");
       return;
     }
 
-    // 1. Valor Bruto Proporcional do 13º
-    const bruto13 = (salarioBruto / 12) * mesesTrabalhados;
+    // 13º proporcional bruto
+    const valorBrutoTotal = (salarioBruto / 12) * meses;
 
-    // 2. Primeira Parcela (50% do bruto proporcional, sem descontos)
-    const primeiraParcela = bruto13 / 2;
+    // 1ª Parcela (50% do valor bruto proporcional, sem descontos)
+    const primeiraParcela = valorBrutoTotal / 2;
 
-    // 3. Descontos oficiais (incidem integralmente na 2ª parcela sobre o valor bruto total do 13º)
-    const descontoINSS = calcularINSS(bruto13);
-    const descontoIRRF = Math.max(
-      0,
-      calcularIRRF(bruto13, descontoINSS, dependentes),
-    );
+    // 2ª Parcela (O restante bruto menos INSS e IRRF incidentes sobre o total)
+    const inss = calcularINSS(valorBrutoTotal);
+    // IRRF simplificado sobre 13º (tributação exclusiva na fonte)
+    let irrf = 0;
+    const baseIR = valorBrutoTotal - inss;
+    if (baseIR > 4664.68) irrf = baseIR * 0.275 - 908.73;
+    else if (baseIR > 3751.05) irrf = baseIR * 0.225 - 675.49;
+    else if (baseIR > 2826.65) irrf = baseIR * 0.15 - 394.16;
+    else if (baseIR > 2428.8) irrf = baseIR * 0.075 - 182.16;
+    irrf = Math.max(0, irrf);
 
-    // 4. Segunda Parcela (50% restante menos INSS e IRRF)
-    const segundaParcela = Math.max(
-      0,
-      bruto13 / 2 - descontoINSS - descontoIRRF,
-    );
+    const totalDescontos = inss + irrf;
+    const segundaParcela = Math.max(0, primeiraParcela - totalDescontos);
+    const valorLiquidoTotal = primeiraParcela + segundaParcela;
 
-    // 5. Total Líquido (1ª + 2ª parcela)
-    const totalLiquido = primeiraParcela + segundaParcela;
+    const formatarMoeda = (valor) =>
+      valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-    const formatarMoeda = (valor) => {
-      return valor.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-    };
-
-    document.getElementById("res-bruto").textContent = formatarMoeda(bruto13);
-    document.getElementById("res-parcela-1").textContent =
+    document.getElementById("res-primeira").textContent =
       formatarMoeda(primeiraParcela);
     document.getElementById("res-inss").textContent =
-      `- ${formatarMoeda(descontoINSS)}`;
+      `- ${formatarMoeda(inss)}`;
     document.getElementById("res-irrf").textContent =
-      `- ${formatarMoeda(descontoIRRF)}`;
-    document.getElementById("res-parcela-2").textContent =
+      `- ${formatarMoeda(irrf)}`;
+    document.getElementById("res-segunda").textContent =
       formatarMoeda(segundaParcela);
     document.getElementById("res-liquido").textContent =
-      formatarMoeda(totalLiquido);
+      formatarMoeda(valorLiquidoTotal);
 
     const cardResultado = document.getElementById("card-resultado");
     cardResultado.classList.remove("hidden");
     cardResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    // Salva no Histórico Local
+    if (typeof salvarNoHistorico === "function") {
+      salvarNoHistorico(
+        "13º Salário",
+        `Líquido: ${formatarMoeda(valorLiquidoTotal)}`,
+      );
+    }
   });
+}
 
 function copiarResumo() {
-  const p1 = document.getElementById("res-parcela-1").textContent;
-  const p2 = document.getElementById("res-parcela-2").textContent;
-  const total = document.getElementById("res-liquido").textContent;
-
-  const texto = `🎄 *Cálculo de 13º Salário (ContaCerta - FM WebDev)*\n• 1ª Parcela (sem descontos): ${p1}\n• 2ª Parcela (já com descontos): ${p2}\n✅ *Total Líquido a Receber: ${total}*`;
+  const liquido = document.getElementById("res-liquido").textContent;
+  const texto = `🎁 *Cálculo de 13º Salário (ContaCerta - FM WebDev)*\n✅ *Total Líquido: ${liquido}*`;
 
   navigator.clipboard.writeText(texto).then(() => {
     const btn = document.getElementById("btn-copiar");
-    const textoOriginal = btn.textContent;
+    const original = btn.textContent;
     btn.textContent = "Copiado! ✓";
-    setTimeout(() => (btn.textContent = textoOriginal), 2000);
+    setTimeout(() => (btn.textContent = original), 2000);
   });
+}
+
+function limparFormulario() {
+  document.getElementById("form-decimo").reset();
+  document.getElementById("card-resultado").classList.add("hidden");
 }

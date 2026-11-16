@@ -45,13 +45,12 @@ function calcularINSS(salario) {
   return inss;
 }
 
-// Cálculo do IRRF (com regra automática do Desconto Simplificado vs Deduções Legais)
+// Cálculo do IRRF
 function calcularIRRF(salarioBruto, inss, dependentes) {
   const deducaoPorDependente = 189.59;
   const deducoesLegais = inss + dependentes * deducaoPorDependente;
   const descontoSimplificado = 607.2;
 
-  // Usa o desconto que for maior (mais vantajoso para o trabalhador)
   const deducaoAplicada = Math.max(deducoesLegais, descontoSimplificado);
   const baseCalculo = salarioBruto - deducaoAplicada;
 
@@ -108,16 +107,20 @@ document
     const cardResultado = document.getElementById("card-resultado");
     cardResultado.classList.remove("hidden");
     cardResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    // Salva no histórico local
+    if (typeof salvarNoHistorico === "function") {
+      salvarNoHistorico(
+        "Salário Líquido",
+        `Líquido: ${formatarMoeda(salarioLiquido)}`,
+      );
+    }
   });
 
 function copiarResumo() {
   const bruto = document.getElementById("res-bruto").textContent;
-  const inss = document.getElementById("res-inss").textContent;
-  const irrf = document.getElementById("res-irrf").textContent;
-  const outros = document.getElementById("res-outros").textContent;
   const liquido = document.getElementById("res-liquido").textContent;
-
-  const texto = `💰 *Cálculo de Salário Líquido (ContaCerta - FM WebDev)*\n• Salário Bruto: ${bruto}\n• INSS: ${inss}\n• IRRF: ${irrf}\n• Outros Descontos: ${outros}\n✅ *Salário Líquido: ${liquido}*`;
+  const texto = `💰 *Salário Líquido (ContaCerta - FM WebDev)*\n• Bruto: ${bruto}\n✅ *Líquido: ${liquido}*`;
 
   navigator.clipboard.writeText(texto).then(() => {
     const btn = document.getElementById("btn-copiar");
@@ -125,4 +128,9 @@ function copiarResumo() {
     btn.textContent = "Copiado! ✓";
     setTimeout(() => (btn.textContent = textoOriginal), 2000);
   });
+}
+
+function limparFormulario() {
+  document.getElementById("form-salario-liquido").reset();
+  document.getElementById("card-resultado").classList.add("hidden");
 }

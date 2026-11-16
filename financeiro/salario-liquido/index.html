@@ -8,7 +8,7 @@
     </title>
     <meta
       name="description"
-      content="Calcule seu salário líquido exato com os descontos oficiais de INSS, Imposto de Renda (IRRF), dependentes e benefícios. Ferramenta gratuita por FM WebDev."
+      content="Calcule seu salário líquido exato para 2026 com os descontos atualizados de INSS, Imposto de Renda e dependentes. Ferramenta por FM WebDev."
     />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
@@ -47,15 +47,15 @@
     <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
       <div class="mb-6">
         <span
-          class="text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded"
+          class="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-1 rounded"
           >Financeiro & Holerite</span
         >
         <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">
           Calculadora de Salário Líquido 2026
         </h1>
         <p class="text-slate-600 mt-1 text-sm md:text-base">
-          Simule quanto vai cair na sua conta após os descontos oficiais de
-          INSS, IRRF e benefícios.
+          Descubra quanto sobra no seu bolso após os descontos obrigatórios de
+          INSS e IRRF.
         </p>
       </div>
 
@@ -126,12 +126,21 @@
               </div>
             </div>
 
-            <button
-              type="submit"
-              class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm mt-2"
-            >
-              Calcular Salário Líquido
-            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <button
+                type="submit"
+                class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm"
+              >
+                Calcular Salário Líquido
+              </button>
+              <button
+                type="button"
+                onclick="limparFormulario()"
+                class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition"
+              >
+                Limpar Campos
+              </button>
+            </div>
           </form>
 
           <!-- Card de Resultado -->
@@ -192,6 +201,14 @@
               Copiar Resumo para WhatsApp
             </button>
           </div>
+
+          <!-- Histórico Recente -->
+          <div
+            id="historico-recente"
+            class="mt-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200"
+          >
+            <!-- Preenchido via JavaScript -->
+          </div>
         </div>
 
         <!-- Barra Lateral -->
@@ -215,18 +232,22 @@
               </li>
               <li>
                 <a
-                  href="../../trabalhista/rescisao-clt/index.html"
+                  href="../../trabalhista/ferias-proporcionais/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between"
-                  ><span>→ Calculadora de Rescisão CLT</span
-                  ><span class="text-xs text-slate-400">Em breve</span></a
+                  ><span>→ Calculadora de Férias</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
                 >
               </li>
               <li>
                 <a
-                  href="../../trabalhista/ferias-proporcionais/index.html"
+                  href="../../trabalhista/rescisao-clt/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between"
-                  ><span>→ Calculadora de Férias</span
-                  ><span class="text-xs text-slate-400">Em breve</span></a
+                  ><span>→ Calculadora de Rescisão CLT</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
                 >
               </li>
               <li>
@@ -234,7 +255,9 @@
                   href="../../trabalhista/decimo-terceiro/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between"
                   ><span>→ Calculadora de 13º Salário</span
-                  ><span class="text-xs text-slate-400">Em breve</span></a
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
                 >
               </li>
             </ul>
@@ -254,70 +277,20 @@
         class="mt-12 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
       >
         <h2 class="text-xl font-bold text-slate-900 mb-3">
-          Como é calculado o Salário Líquido?
+          Como é feito o cálculo do Salário Líquido?
         </h2>
         <p class="text-slate-600 text-sm leading-relaxed mb-4">
-          O salário líquido é o valor final que o trabalhador recebe em conta
-          após serem subtraídos os impostos obrigatórios por lei e os benefícios
-          descontados em folha de pagamento.
+          O salário líquido é o valor que realmente cai na sua conta bancária no
+          final do mês. Ele é obtido subtraindo-se do seu salário bruto os
+          encargos sociais obrigatórios, como a contribuição previdenciária do
+          <strong>INSS</strong> e o imposto de renda retido na fonte
+          (<strong>IRRF</strong>).
         </p>
-
-        <h3 class="text-lg font-bold text-slate-800 mb-2">
-          Principais descontos da folha CLT
-        </h3>
-        <ul class="list-disc list-inside text-slate-600 text-sm space-y-2 mb-6">
-          <li>
-            <strong>INSS (Previdência Social):</strong> Calculado de forma
-            progressiva por faixas salariais (de 7,5% até 14%, respeitando o
-            teto previdenciário).
-          </li>
-          <li>
-            <strong>IRRF (Imposto de Renda Retido na Fonte):</strong> Incide
-            sobre o salário após a dedução do INSS e dependentes — ou aplicando
-            o desconto simplificado mensal quando for mais vantajoso.
-          </li>
-          <li>
-            <strong>Benefícios e outros descontos:</strong> Vale-transporte
-            (limitado a até 6% do salário base), coparticipação de plano de
-            saúde, vale-refeição ou adiantamentos salariais.
-          </li>
-        </ul>
-
-        <h3 class="text-lg font-bold text-slate-800 mb-3">
-          Perguntas Frequentes
-        </h3>
-        <div class="space-y-3">
-          <details class="border border-slate-200 rounded-lg p-3">
-            <summary
-              class="font-semibold text-sm text-slate-800 cursor-pointer"
-            >
-              O FGTS é descontado do meu salário líquido?
-            </summary>
-            <p class="text-slate-600 text-sm mt-2">
-              Não. O FGTS (8% sobre o salário bruto) é uma obrigação paga
-              inteiramente pelo empregador e depositada na sua conta vinculada
-              da Caixa, sem nenhum desconto no seu holerite.
-            </p>
-          </details>
-          <details class="border border-slate-200 rounded-lg p-3">
-            <summary
-              class="font-semibold text-sm text-slate-800 cursor-pointer"
-            >
-              Como funciona o desconto do Vale-Transporte?
-            </summary>
-            <p class="text-slate-600 text-sm mt-2">
-              A empresa pode descontar no máximo 6% do seu salário base para
-              custear o vale-transporte. Caso o valor total das passagens seja
-              menor que 6% do seu salário, desconta-se apenas o valor real das
-              passagens.
-            </p>
-          </details>
-        </div>
       </article>
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12">
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12 mb-10">
       <div
         class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4"
       >
@@ -341,5 +314,6 @@
     </footer>
 
     <script src="../../js/salario-liquido.js"></script>
+    <script src="../../js/app.js"></script>
   </body>
 </html>
