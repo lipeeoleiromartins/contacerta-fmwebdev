@@ -1,8 +1,7 @@
-// Máscara de moeda brasileira enquanto digita
 const inputSalario = document.getElementById("salario");
 
 inputSalario.addEventListener("input", function (e) {
-  let valor = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
+  let valor = e.target.value.replace(/\D/g, "");
   if (valor === "") {
     e.target.value = "";
     return;
@@ -13,7 +12,6 @@ inputSalario.addEventListener("input", function (e) {
   e.target.value = valor;
 });
 
-// Função auxiliar para converter "2.500,00" em número puro 2500.00
 function lerMoeda(texto) {
   if (!texto) return 0;
   return parseFloat(texto.replace(/\./g, "").replace(",", ".")) || 0;
@@ -24,7 +22,6 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // 1. Capturar valores dos inputs
     const salarioBruto = lerMoeda(document.getElementById("salario").value);
     const cargaHoraria =
       parseFloat(document.getElementById("carga-horaria").value) || 220;
@@ -39,33 +36,15 @@ document
       return;
     }
 
-    // 2. Cálculos baseados na CLT
     const valorHoraNormal = salarioBruto / cargaHoraria;
-
-    // Hora extra 50% (dias úteis)
-    const valorHora50 = valorHoraNormal * 1.5;
-    const total50 = valorHora50 * horas50;
-
-    // Hora extra 100% (domingos e feriados)
-    const valorHora100 = valorHoraNormal * 2.0;
-    const total100 = valorHora100 * horas100;
-
-    // Adicional noturno (20% sobre a hora normal)
-    const valorAdicionalNoturno = valorHoraNormal * 0.2;
-    const totalNoturno = valorAdicionalNoturno * horasNoturnas;
-
-    // Total Geral
+    const total50 = valorHoraNormal * 1.5 * horas50;
+    const total100 = valorHoraNormal * 2.0 * horas100;
+    const totalNoturno = valorHoraNormal * 0.2 * horasNoturnas;
     const totalReceber = total50 + total100 + totalNoturno;
 
-    // 3. Formatar para Moeda Brasileira (R$)
-    const formatarMoeda = (valor) => {
-      return valor.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-    };
+    const formatarMoeda = (valor) =>
+      valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-    // 4. Exibir na tela
     document.getElementById("res-hora-normal").textContent =
       formatarMoeda(valorHoraNormal);
     document.getElementById("res-total-50").textContent =
@@ -77,13 +56,19 @@ document
     document.getElementById("res-total-geral").textContent =
       formatarMoeda(totalReceber);
 
-    // Mostrar o card de resultado suavemente
     const cardResultado = document.getElementById("card-resultado");
     cardResultado.classList.remove("hidden");
     cardResultado.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    // Salva no Histórico Local
+    if (typeof salvarNoHistorico === "function") {
+      salvarNoHistorico(
+        "Horas Extras",
+        `Total: ${formatarMoeda(totalReceber)}`,
+      );
+    }
   });
 
-// Função para copiar o resumo para o WhatsApp
 function copiarResumo() {
   const total = document.getElementById("res-total-geral").textContent;
   const h50 = document.getElementById("res-total-50").textContent;
@@ -94,8 +79,13 @@ function copiarResumo() {
 
   navigator.clipboard.writeText(texto).then(() => {
     const btn = document.getElementById("btn-copiar");
-    const textoOriginal = btn.textContent;
+    const original = btn.textContent;
     btn.textContent = "Copiado! ✓";
-    setTimeout(() => (btn.textContent = textoOriginal), 2000);
+    setTimeout(() => (btn.textContent = original), 2000);
   });
+}
+
+function limparFormulario() {
+  document.getElementById("form-horas-extras").reset();
+  document.getElementById("card-resultado").classList.add("hidden");
 }
