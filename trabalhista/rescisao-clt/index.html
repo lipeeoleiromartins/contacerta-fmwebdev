@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Rescisão Trabalhista CLT 2026 | ContaCerta</title>
+    <meta
+      name="description"
+      content="Calcule sua rescisão CLT completa: saldo de salário, aviso prévio proporcional, férias vencidas e proporcionais, 13º salário e multa de 40% do FGTS."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen"
+  >
+    <!-- Cabeçalho -->
+    <header class="bg-blue-700 text-white shadow-md">
+      <div
+        class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a
+          href="../../index.html"
+          class="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2"
+        >
+          <span class="text-xl font-bold tracking-tight"
+            >Conta<span class="text-blue-200">Certa</span></span
+          >
+          <span
+            class="text-[11px] font-medium text-blue-200 bg-blue-800/60 px-2 py-0.5 rounded w-fit"
+            >por FM WebDev</span
+          >
+        </a>
+        <nav class="space-x-4 text-sm font-medium">
+          <a href="../../index.html" class="hover:underline"
+            >Todas as Ferramentas</a
+          >
+          <a href="#como-calcular" class="hover:underline hidden sm:inline"
+            >Como Calcular</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+      <div class="mb-6">
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-1 rounded"
+          >Trabalhista CLT</span
+        >
+        <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">
+          Calculadora de Rescisão Trabalhista (CLT)
+        </h1>
+        <p class="text-slate-600 mt-1 text-sm md:text-base">
+          Simule todas as verbas rescisórias, férias, 13º proporcional, aviso
+          prévio e multa do FGTS.
+        </p>
+      </div>
+
+      <!-- Espaço AdSense Topo -->
+      <div
+        class="w-full bg-slate-200/60 border border-dashed border-slate-300 rounded-lg p-3 text-center text-xs text-slate-400 mb-6"
+      >
+        Espaço reservado para anúncio (Google AdSense)
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <!-- Formulário -->
+        <div
+          class="md:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+        >
+          <form id="form-rescisao" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="salario"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Último Salário Bruto (R$)</label
+                >
+                <input
+                  type="text"
+                  id="salario"
+                  inputmode="numeric"
+                  placeholder="Ex: 2.500,00"
+                  required
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="motivo"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Motivo da Rescisão</label
+                >
+                <select
+                  id="motivo"
+                  class="w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-600 outline-none text-sm"
+                >
+                  <option value="sem-justa-causa" selected>
+                    Dispensa sem justa causa
+                  </option>
+                  <option value="pedido-demissao">Pedido de demissão</option>
+                  <option value="acordo">Acordo comum (Reforma CLT)</option>
+                  <option value="justa-causa">Dispensa por justa causa</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="aviso"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Aviso Prévio</label
+                >
+                <select
+                  id="aviso"
+                  class="w-full px-3 py-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-600 outline-none text-sm"
+                >
+                  <option value="indenizado" selected>
+                    Indenizado (empresa paga)
+                  </option>
+                  <option value="trabalhado">Trabalhado</option>
+                  <option value="nao-cumprido">
+                    Não cumprido (descontado)
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  for="anos-empresa"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Anos Completos na Empresa</label
+                >
+                <input
+                  type="number"
+                  id="anos-empresa"
+                  min="0"
+                  max="35"
+                  value="1"
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+                <span class="text-[11px] text-slate-400"
+                  >+3 dias de aviso por ano</span
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div>
+                <label
+                  for="dias-trabalhados"
+                  class="block text-xs font-semibold text-slate-700 mb-1"
+                  >Dias Trab. no Mês</label
+                >
+                <input
+                  type="number"
+                  id="dias-trabalhados"
+                  min="0"
+                  max="31"
+                  value="15"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="meses-13"
+                  class="block text-xs font-semibold text-slate-700 mb-1"
+                  >Meses de 13º no Ano</label
+                >
+                <input
+                  type="number"
+                  id="meses-13"
+                  min="0"
+                  max="12"
+                  value="6"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="meses-ferias"
+                  class="block text-xs font-semibold text-slate-700 mb-1"
+                  >Meses Férias Prop.</label
+                >
+                <input
+                  type="number"
+                  id="meses-ferias"
+                  min="0"
+                  max="12"
+                  value="6"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+            </div>
+
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center pt-1"
+            >
+              <div>
+                <label
+                  for="saldo-fgts"
+                  class="block text-xs font-semibold text-slate-700 mb-1"
+                  >Saldo Atual do FGTS (R$)</label
+                >
+                <input
+                  type="text"
+                  id="saldo-fgts"
+                  inputmode="numeric"
+                  placeholder="Ex: 5.000,00"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+                <span class="text-[11px] text-slate-400"
+                  >Para calcular multa de 40% ou 20%</span
+                >
+              </div>
+
+              <div
+                class="bg-slate-50 p-3 rounded-lg border border-slate-200 mt-2 sm:mt-4"
+              >
+                <label
+                  class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700"
+                >
+                  <input
+                    type="checkbox"
+                    id="ferias-vencidas"
+                    class="w-4 h-4 text-blue-600 rounded border-slate-300"
+                  />
+                  <span>Possui férias vencidas (+1/3)?</span>
+                </label>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm mt-2"
+            >
+              Calcular Rescisão CLT
+            </button>
+          </form>
+
+          <!-- Card de Resultado -->
+          <div
+            id="card-resultado"
+            class="hidden mt-6 pt-6 border-t border-slate-200"
+          >
+            <h2 class="text-lg font-bold text-slate-800 mb-3">
+              Demonstrativo da Rescisão
+            </h2>
+
+            <div
+              class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200"
+            >
+              <div class="flex justify-between">
+                <span class="text-slate-600">Saldo de Salário:</span>
+                <span
+                  id="res-saldo-salario"
+                  class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Aviso Prévio Indenizado:</span>
+                <span id="res-aviso" class="font-semibold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">13º Salário Proporcional:</span>
+                <span id="res-13" class="font-semibold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Férias Vencidas + 1/3:</span>
+                <span
+                  id="res-ferias-vencidas"
+                  class="font-semibold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Férias Proporcionais + 1/3:</span>
+                <span id="res-ferias-prop" class="font-semibold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Desconto INSS:</span>
+                <span id="res-inss" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Desconto IRRF:</span>
+                <span id="res-irrf" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Desconto Aviso Não Cumprido:</span>
+                <span
+                  id="res-desconto-aviso"
+                  class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 font-bold text-slate-900"
+              >
+                <span>Valor Líquido da Rescisão:</span>
+                <span id="res-liquido" class="text-blue-700">R$ 0,00</span>
+              </div>
+              <div class="flex justify-between text-slate-700">
+                <span>Multa Rescisória FGTS (40% ou 20%):</span>
+                <span id="res-multa-fgts" class="font-semibold text-emerald-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 text-base"
+              >
+                <span class="font-bold text-slate-900"
+                  >Total Geral Estimado:</span
+                >
+                <span
+                  id="res-total-geral"
+                  class="font-extrabold text-emerald-600"
+                  >R$ 0,00</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="btn-copiar"
+              onclick="copiarResumo()"
+              class="w-full mt-3 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium py-2.5 px-4 rounded-lg transition"
+            >
+              Copiar Resumo para WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra Lateral -->
+        <aside class="md:col-span-5 space-y-6">
+          <div
+            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+          >
+            <h3 class="font-bold text-slate-900 mb-3 text-base">
+              Outras Calculadoras Úteis
+            </h3>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="../horas-extras/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Horas Extras</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../financeiro/salario-liquido/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Salário Líquido</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../ferias-proporcionais/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Férias</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../decimo-terceiro/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de 13º Salário</span
+                  ><span class="text-xs text-slate-400">Em breve</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="bg-slate-200/60 border border-dashed border-slate-300 rounded-xl h-60 flex items-center justify-center text-xs text-slate-400 p-4 text-center"
+          >
+            Espaço reservado para anúncio lateral (300x250)
+          </div>
+        </aside>
+      </div>
+
+      <!-- Conteúdo SEO -->
+      <article
+        id="como-calcular"
+        class="mt-12 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
+      >
+        <h2 class="text-xl font-bold text-slate-900 mb-3">
+          Quais são os direitos na rescisão de contrato CLT?
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+          As verbas rescisórias variam conforme o motivo do desligamento. Na
+          <strong>dispensa sem justa causa</strong>, o trabalhador tem direito
+          ao pacote completo: saldo dos dias trabalhados no mês, aviso prévio
+          proporcional (30 dias + 3 dias por ano trabalhado), 13º salário
+          proporcional, férias vencidas e proporcionais com acréscimo de 1/3,
+          além da multa de 40% sobre o saldo do FGTS.
+        </p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-2">
+          Prazo para pagamento da rescisão
+        </h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+          Pela legislação atual, a empresa tem até
+          <strong>10 dias corridos</strong> contados a partir do término do
+          contrato para efetuar o pagamento de todas as verbas rescisórias e
+          entregar as guias para saque do FGTS e seguro-desemprego (quando
+          aplicável).
+        </p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">
+          Perguntas Frequentes
+        </h3>
+        <div class="space-y-3">
+          <details class="border border-slate-200 rounded-lg p-3">
+            <summary
+              class="font-semibold text-sm text-slate-800 cursor-pointer"
+            >
+              O que muda na demissão por acordo (comum acordo)?
+            </summary>
+            <p class="text-slate-600 text-sm mt-2">
+              Na demissão consensual (art. 484-A da CLT), o trabalhador recebe
+              metade do aviso prévio indenizado (50%), multa de 20% sobre o
+              FGTS, integralidade das demais verbas (férias e 13º) e pode
+              movimentar até 80% do saldo do FGTS, mas não tem direito ao
+              seguro-desemprego.
+            </p>
+          </details>
+          <details class="border border-slate-200 rounded-lg p-3">
+            <summary
+              class="font-semibold text-sm text-slate-800 cursor-pointer"
+            >
+              Quem pede demissão perde férias proporcionais?
+            </summary>
+            <p class="text-slate-600 text-sm mt-2">
+              Não. Mesmo quem pede demissão com menos de 1 ano de empresa tem
+              direito a receber as férias proporcionais acrescidas de 1/3 e o
+              13º salário proporcional.
+            </p>
+          </details>
+        </div>
+      </article>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12">
+      <div
+        class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <div class="text-center md:text-left">
+          <p>
+            © 2026 ContaCerta — Desenvolvido por
+            <strong class="text-white">FM WebDev</strong>.
+          </p>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Os resultados têm caráter meramente informativo e educativo.
+          </p>
+        </div>
+        <div class="space-x-4">
+          <a href="../../sobre.html" class="hover:text-white">Sobre</a>
+          <a href="../../privacidade.html" class="hover:text-white"
+            >Política de Privacidade</a
+          >
+          <a href="../../termos.html" class="hover:text-white">Termos de Uso</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/rescisao.js"></script>
+  </body>
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Calculadora de 13º Salário 2026 (1ª e 2ª Parcela) | ContaCerta
+    </title>
+    <meta
+      name="description"
+      content="Calcule gratuitamente o valor da 1ª e 2ª parcela do seu 13º salário proporcional ou integral com descontos de INSS e IRRF. Ferramenta por FM WebDev."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen"
+  >
+    <!-- Cabeçalho -->
+    <header class="bg-blue-700 text-white shadow-md">
+      <div
+        class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a
+          href="../../index.html"
+          class="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2"
+        >
+          <span class="text-xl font-bold tracking-tight"
+            >Conta<span class="text-blue-200">Certa</span></span
+          >
+          <span
+            class="text-[11px] font-medium text-blue-200 bg-blue-800/60 px-2 py-0.5 rounded w-fit"
+            >por FM WebDev</span
+          >
+        </a>
+        <nav class="space-x-4 text-sm font-medium">
+          <a href="../../index.html" class="hover:underline"
+            >Todas as Ferramentas</a
+          >
+          <a href="#como-calcular" class="hover:underline hidden sm:inline"
+            >Como Calcular</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+      <div class="mb-6">
+        <span
+          class="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-1 rounded"
+          >Trabalhista CLT</span
+        >
+        <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">
+          Calculadora de 13º Salário 2026
+        </h1>
+        <p class="text-slate-600 mt-1 text-sm md:text-base">
+          Descubra o valor exato da 1ª e da 2ª parcela do seu décimo terceiro
+          com os descontos oficiais.
+        </p>
+      </div>
+
+      <!-- Espaço AdSense Topo -->
+      <div
+        class="w-full bg-slate-200/60 border border-dashed border-slate-300 rounded-lg p-3 text-center text-xs text-slate-400 mb-6"
+      >
+        Espaço reservado para anúncio (Google AdSense)
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <!-- Formulário -->
+        <div
+          class="md:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200"
+        >
+          <form id="form-decimo-terceiro" class="space-y-4">
+            <div>
+              <label
+                for="salario"
+                class="block text-sm font-semibold text-slate-700 mb-1"
+                >Salário Bruto Mensal (R$)</label
+              >
+              <input
+                type="text"
+                id="salario"
+                inputmode="numeric"
+                placeholder="Ex: 2.500,00"
+                required
+                class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="meses"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Meses Trabalhados no Ano</label
+                >
+                <select
+                  id="meses"
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-600 outline-none"
+                >
+                  <option value="12" selected>12 meses (Ano completo)</option>
+                  <option value="11">11 meses</option>
+                  <option value="10">10 meses</option>
+                  <option value="9">9 meses</option>
+                  <option value="8">8 meses</option>
+                  <option value="7">7 meses</option>
+                  <option value="6">6 meses</option>
+                  <option value="5">5 meses</option>
+                  <option value="4">4 meses</option>
+                  <option value="3">3 meses</option>
+                  <option value="2">2 meses</option>
+                  <option value="1">1 mês</option>
+                </select>
+                <span class="text-[11px] text-slate-400"
+                  >Conta mês com 15+ dias trabalhados</span
+                >
+              </div>
+
+              <div>
+                <label
+                  for="dependentes"
+                  class="block text-sm font-semibold text-slate-700 mb-1"
+                  >Número de Dependentes</label
+                >
+                <input
+                  type="number"
+                  id="dependentes"
+                  min="0"
+                  value="0"
+                  class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 outline-none"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition shadow-sm mt-2"
+            >
+              Calcular 13º Salário
+            </button>
+          </form>
+
+          <!-- Card de Resultado -->
+          <div
+            id="card-resultado"
+            class="hidden mt-6 pt-6 border-t border-slate-200"
+          >
+            <h2 class="text-lg font-bold text-slate-800 mb-3">
+              Detalhamento das Parcelas
+            </h2>
+
+            <div
+              class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200"
+            >
+              <div class="flex justify-between">
+                <span class="text-slate-600">Valor Bruto Proporcional:</span>
+                <span id="res-bruto" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between bg-blue-50/80 p-2 rounded border border-blue-100"
+              >
+                <span class="font-semibold text-blue-900"
+                  >1ª Parcela (até 30/Nov — sem descontos):</span
+                >
+                <span id="res-parcela-1" class="font-bold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600"
+                  >Desconto INSS (na 2ª parcela):</span
+                >
+                <span id="res-inss" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600"
+                  >Desconto IRRF (na 2ª parcela):</span
+                >
+                <span id="res-irrf" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between bg-blue-50/80 p-2 rounded border border-blue-100"
+              >
+                <span class="font-semibold text-blue-900"
+                  >2ª Parcela (até 20/Dez — líquida):</span
+                >
+                <span id="res-parcela-2" class="font-bold text-blue-700"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 text-base"
+              >
+                <span class="font-bold text-slate-900"
+                  >Total Líquido (1ª + 2ª Parcela):</span
+                >
+                <span id="res-liquido" class="font-extrabold text-emerald-600"
+                  >R$ 0,00</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="btn-copiar"
+              onclick="copiarResumo()"
+              class="w-full mt-3 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium py-2.5 px-4 rounded-lg transition"
+            >
+              Copiar Resumo para WhatsApp
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra Lateral -->
+        <aside class="md:col-span-5 space-y-6">
+          <div
+            class="bg-white p-5 rounded-xl shadow-sm border border-slate-200"
+          >
+            <h3 class="font-bold text-slate-900 mb-3 text-base">
+              Outras Calculadoras Úteis
+            </h3>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="../horas-extras/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Horas Extras</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../financeiro/salario-liquido/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Salário Líquido</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../ferias-proporcionais/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Férias</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../rescisao-clt/index.html"
+                  class="text-blue-700 hover:underline flex items-center justify-between"
+                  ><span>→ Calculadora de Rescisão CLT</span
+                  ><span class="text-xs text-emerald-600 font-medium"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="bg-slate-200/60 border border-dashed border-slate-300 rounded-xl h-60 flex items-center justify-center text-xs text-slate-400 p-4 text-center"
+          >
+            Espaço reservado para anúncio lateral (300x250)
+          </div>
+        </aside>
+      </div>
+
+      <!-- Conteúdo SEO -->
+      <article
+        id="como-calcular"
+        class="mt-12 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200"
+      >
+        <h2 class="text-xl font-bold text-slate-900 mb-3">
+          Como funciona o pagamento do 13º Salário?
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+          Todo trabalhador com carteira assinada que tenha trabalhado pelo menos
+          15 dias no ano tem direito ao 13º salário (gratificação natalina). O
+          cálculo corresponde a <strong>1/12 (um doze avos)</strong> da
+          remuneração por mês trabalhado.
+        </p>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-2">
+          Datas de pagamento das parcelas
+        </h3>
+        <ul class="list-disc list-inside text-slate-600 text-sm space-y-2 mb-6">
+          <li>
+            <strong>1ª Parcela (até 30 de novembro):</strong> Corresponde
+            exatamente à metade (50%) do valor bruto proporcional a que o
+            funcionário tem direito, paga sem nenhum desconto de imposto.
+          </li>
+          <li>
+            <strong>2ª Parcela (até 20 de dezembro):</strong> Corresponde aos
+            50% restantes, porém com o desconto integral do INSS e do Imposto de
+            Renda (IRRF) calculados sobre o valor total do 13º.
+          </li>
+        </ul>
+
+        <h3 class="text-lg font-bold text-slate-800 mb-3">
+          Perguntas Frequentes
+        </h3>
+        <div class="space-y-3">
+          <details class="border border-slate-200 rounded-lg p-3">
+            <summary
+              class="font-semibold text-sm text-slate-800 cursor-pointer"
+            >
+              Horas extras e adicional noturno entram no 13º salário?
+            </summary>
+            <p class="text-slate-600 text-sm mt-2">
+              Sim. Se você faz horas extras, recebe adicional noturno,
+              insalubridade ou comissões com habitualidade, a média anual desses
+              valores deve ser somada ao salário base para calcular o 13º.
+            </p>
+          </details>
+          <details class="border border-slate-200 rounded-lg p-3">
+            <summary
+              class="font-semibold text-sm text-slate-800 cursor-pointer"
+            >
+              Quem está afastado pelo INSS recebe 13º?
+            </summary>
+            <p class="text-slate-600 text-sm mt-2">
+              A empresa paga o 13º proporcional aos meses trabalhados antes e
+              depois do afastamento (incluindo os primeiros 15 dias de
+              atestado). O período em que o trabalhador ficou recebendo
+              benefício previdenciário é pago pelo próprio INSS (abono anual).
+            </p>
+          </details>
+        </div>
+      </article>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12">
+      <div
+        class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <div class="text-center md:text-left">
+          <p>
+            © 2026 ContaCerta — Desenvolvido por
+            <strong class="text-white">FM WebDev</strong>.
+          </p>
+          <p class="text-[11px] text-slate-500 mt-1">
+            Os resultados têm caráter meramente informativo e educativo.
+          </p>
+        </div>
+        <div class="space-x-4">
+          <a href="../../sobre.html" class="hover:text-white">Sobre</a>
+          <a href="../../privacidade.html" class="hover:text-white"
+            >Política de Privacidade</a
+          >
+          <a href="../../termos.html" class="hover:text-white">Termos de Uso</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/decimo-terceiro.js"></script>
+  </body>
+</html>
