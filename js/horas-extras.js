@@ -1,25 +1,27 @@
 const inputSalario = document.getElementById("salario");
 
-inputSalario.addEventListener("input", function (e) {
-  let valor = e.target.value.replace(/\D/g, "");
-  if (valor === "") {
-    e.target.value = "";
-    return;
-  }
-  valor = (parseInt(valor, 10) / 100).toFixed(2);
-  valor = valor.replace(".", ",");
-  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  e.target.value = valor;
-});
+if (inputSalario) {
+  inputSalario.addEventListener("input", function (e) {
+    let valor = e.target.value.replace(/\D/g, "");
+    if (valor === "") {
+      e.target.value = "";
+      return;
+    }
+    valor = (parseInt(valor, 10) / 100).toFixed(2);
+    valor = valor.replace(".", ",");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    e.target.value = valor;
+  });
+}
 
 function lerMoeda(texto) {
   if (!texto) return 0;
   return parseFloat(texto.replace(/\./g, "").replace(",", ".")) || 0;
 }
 
-document
-  .getElementById("form-horas-extras")
-  .addEventListener("submit", function (e) {
+const formHorasExtras = document.getElementById("form-horas-extras");
+if (formHorasExtras) {
+  formHorasExtras.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const salarioBruto = lerMoeda(document.getElementById("salario").value);
@@ -68,6 +70,7 @@ document
       );
     }
   });
+}
 
 function copiarResumo() {
   const total = document.getElementById("res-total-geral").textContent;
