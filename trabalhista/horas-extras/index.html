@@ -111,76 +111,163 @@
         <div
           class="md:col-span-7 bg-white border border-slate-300/90 border-t-4 border-t-blue-600 p-6 sm:p-8 rounded-xl shadow-md"
         >
-          <form id="calcForm" class="space-y-4">
+          <form id="form-horas-extras" class="space-y-4">
             <div>
-              <label class="block text-sm font-bold text-slate-800 mb-1"
-                >Salário Bruto (R$)</label
+              <label
+                for="salario"
+                class="block text-sm font-bold text-slate-800 mb-1"
+                >Salário Bruto Mensal (R$)</label
               >
               <input
                 type="text"
                 id="salario"
                 inputmode="numeric"
-                required
                 placeholder="Ex: 3.000,00"
+                required
                 class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
               />
             </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-bold text-slate-800 mb-1"
+                <label
+                  for="carga-horaria"
+                  class="block text-sm font-bold text-slate-800 mb-1"
                   >Jornada Mensal (Horas)</label
                 >
                 <input
                   type="number"
-                  id="jornada"
+                  id="carga-horaria"
                   value="220"
                   required
                   class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
               <div>
-                <label class="block text-sm font-bold text-slate-800 mb-1"
-                  >Quantidade de Horas Extras</label
+                <label
+                  for="horas-50"
+                  class="block text-sm font-bold text-slate-800 mb-1"
+                  >Horas Extras 50%</label
                 >
                 <input
                   type="number"
-                  id="qtdHoras"
+                  id="horas-50"
                   step="0.5"
-                  required
-                  placeholder="Ex: 10"
+                  min="0"
+                  value="0"
                   class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
             </div>
-            <div>
-              <label class="block text-sm font-bold text-slate-800 mb-1"
-                >Percentual da Hora Extra</label
-              >
-              <select
-                id="percentual"
-                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
-              >
-                <option value="50">50% (Dias úteis / Sábados)</option>
-                <option value="100">100% (Domingos e Feriados)</option>
-              </select>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="horas-100"
+                  class="block text-sm font-bold text-slate-800 mb-1"
+                  >Horas Extras 100%</label
+                >
+                <input
+                  type="number"
+                  id="horas-100"
+                  step="0.5"
+                  min="0"
+                  value="0"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
+              <div>
+                <label
+                  for="horas-noturnas"
+                  class="block text-sm font-bold text-slate-800 mb-1"
+                  >Horas Noturnas</label
+                >
+                <input
+                  type="number"
+                  id="horas-noturnas"
+                  step="0.5"
+                  min="0"
+                  value="0"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+              </div>
             </div>
-            <button
-              type="submit"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition"
-            >
-              Calcular Horas Extras
-            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition shadow"
+              >
+                Calcular Horas Extras
+              </button>
+              <button
+                type="button"
+                onclick="limparFormulario()"
+                class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition"
+              >
+                Limpar Campos
+              </button>
+            </div>
           </form>
 
           <div
-            id="resultado"
-            class="hidden mt-6 p-5 bg-blue-50 border border-blue-200 rounded-lg text-slate-800 space-y-2"
+            id="card-resultado"
+            class="hidden mt-6 pt-6 border-t border-slate-200"
           >
-            <h3 class="font-display font-bold text-lg text-blue-900">
-              Resultado da Simulação:
-            </h3>
-            <p id="resValorHora" class="text-sm"></p>
-            <p id="resTotal" class="text-base font-bold text-blue-950"></p>
+            <h2 class="font-display text-lg font-bold text-slate-900 mb-3">
+              Detalhamento da Simulação
+            </h2>
+
+            <div
+              class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200 text-slate-800"
+            >
+              <div class="flex justify-between">
+                <span class="text-slate-600">Valor da Hora Normal:</span>
+                <span id="res-hora-normal" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Total Extras 50%:</span>
+                <span id="res-total-50" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Total Extras 100%:</span>
+                <span id="res-total-100" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Total Adicional Noturno:</span>
+                <span
+                  id="res-total-noturno"
+                  class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 text-base"
+              >
+                <span class="font-bold text-slate-900"
+                  >Total Bruto a Receber:</span
+                >
+                <span
+                  id="res-total-geral"
+                  class="font-extrabold text-emerald-600"
+                  >R$ 0,00</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="btn-copiar"
+              onclick="copiarResumo()"
+              class="w-full mt-3 bg-slate-900 hover:bg-slate-950 text-white text-sm font-medium py-2.5 px-4 rounded-lg transition"
+            >
+              Copiar Resumo para WhatsApp
+            </button>
           </div>
 
           <div id="historico-recente" class="mt-6 bg-white rounded-xl"></div>
