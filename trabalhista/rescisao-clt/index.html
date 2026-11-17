@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora de Rescisão Trabalhista | ContaCerta</title>
+    <title>Calculadora de Rescisão CLT 2026 | ContaCerta</title>
     <meta
       name="description"
-      content="Simule os valores de rescisão para demissão sem justa causa, pedido ou acordo CLT. Por FM WebDev."
+      content="Calcule os valores da sua rescisão trabalhista por demissão sem justa causa, pedido de demissão ou acordo. Ferramenta por FM WebDev."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,7 +84,7 @@
       </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
       <div class="mb-6">
         <a
           href="../../index.html"
@@ -94,67 +94,243 @@
         </a>
         <span
           class="block text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 border border-rose-200 px-3 py-1 rounded-md w-fit"
-          >Calculadora CLT</span
+          >Trabalhista CLT</span
         >
         <h1
           class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3"
         >
-          Calculadora de Rescisão Trabalhista
+          Calculadora de Rescisão CLT
         </h1>
         <p class="text-slate-600 mt-1 text-sm sm:text-base">
-          Simule as verbas rescisórias devidas no término do contrato de
-          trabalho.
+          Simule os valores devidos no fim do contrato de trabalho conforme as
+          regras da legislação.
         </p>
       </div>
 
-      <!-- Formulário da Calculadora -->
-      <div
-        class="bg-white border border-slate-300/90 p-6 sm:p-8 rounded-xl shadow-md space-y-6"
-      >
-        <form id="calcForm" class="space-y-4">
-          <div>
-            <label class="block text-sm font-bold text-slate-800 mb-1"
-              >Salário Bruto (R$)</label
-            >
-            <input
-              type="number"
-              id="salario"
-              step="0.01"
-              required
-              placeholder="Ex: 3000.00"
-              class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-bold text-slate-800 mb-1"
-              >Motivo da Rescisão</label
-            >
-            <select
-              id="motivo"
-              class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
-            >
-              <option value="sem_justa_causa">Demissão sem justa causa</option>
-              <option value="pedido_demissao">Pedido de demissão</option>
-              <option value="acordo">Acordo mútuo (Art. 484-A CLT)</option>
-            </select>
-          </div>
-          <button
-            type="submit"
-            class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-lg shadow transition"
-          >
-            Calcular Rescisão
-          </button>
-        </form>
-
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div
-          id="resultado"
-          class="hidden mt-6 p-5 bg-rose-50 border border-rose-200 rounded-lg text-slate-800 space-y-2"
+          class="md:col-span-7 bg-white border border-slate-300/90 border-t-4 border-t-rose-600 p-6 sm:p-8 rounded-xl shadow-md"
         >
-          <h3 class="font-display font-bold text-lg text-rose-900">
-            Resumo da Rescisão:
-          </h3>
-          <p id="resTotal" class="text-base font-bold text-rose-950"></p>
+          <form id="form-rescisao" class="space-y-4">
+            <div>
+              <label
+                for="salario"
+                class="block text-sm font-bold text-slate-800 mb-1"
+                >Salário Bruto Mensal (R$)</label
+              >
+              <input
+                type="text"
+                id="salario"
+                inputmode="numeric"
+                placeholder="Ex: 3.000,00"
+                required
+                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
+              />
+            </div>
+
+            <div>
+              <label
+                for="motivo"
+                class="block text-sm font-bold text-slate-800 mb-1"
+                >Motivo da Rescisão</label
+              >
+              <select
+                id="motivo"
+                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
+              >
+                <option value="sem-justa-causa" selected>
+                  Demissão sem justa causa
+                </option>
+                <option value="pedido-demissao">Pedido de demissão</option>
+                <option value="acordo">Acordo comum (Art. 484-A CLT)</option>
+                <option value="justa-causa">Demissão por justa causa</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label
+                  for="meses-trab"
+                  class="block text-xs font-bold text-slate-800 mb-1"
+                  >Meses no Ano Atual</label
+                >
+                <input
+                  type="number"
+                  id="meses-trab"
+                  min="0"
+                  max="12"
+                  value="6"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
+                />
+              </div>
+              <div>
+                <label
+                  for="dias-saldo"
+                  class="block text-xs font-bold text-slate-800 mb-1"
+                  >Dias Trabalhados no Mês</label
+                >
+                <input
+                  type="number"
+                  id="dias-saldo"
+                  min="0"
+                  max="31"
+                  value="15"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
+                />
+              </div>
+              <div>
+                <label
+                  for="anos-empresa"
+                  class="block text-xs font-bold text-slate-800 mb-1"
+                  >Anos na Empresa</label
+                >
+                <input
+                  type="number"
+                  id="anos-empresa"
+                  min="1"
+                  value="2"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-600"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <button
+                type="submit"
+                class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-4 rounded-lg transition shadow"
+              >
+                Calcular Rescisão
+              </button>
+              <button
+                type="button"
+                onclick="limparFormulario()"
+                class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition"
+              >
+                Limpar Campos
+              </button>
+            </div>
+          </form>
+
+          <div
+            id="card-resultado"
+            class="hidden mt-6 pt-6 border-t border-slate-200"
+          >
+            <h2 class="font-display text-lg font-bold text-slate-900 mb-3">
+              Demonstrativo da Rescisão
+            </h2>
+
+            <div
+              class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200 text-slate-800"
+            >
+              <div class="flex justify-between">
+                <span class="text-slate-600">Saldo de Salário:</span>
+                <span id="res-saldo" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Aviso Prévio Indenizado:</span>
+                <span id="res-aviso" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">13º Salário Proporcional:</span>
+                <span id="res-decimo" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Férias Proporcionais + 1/3:</span>
+                <span id="res-ferias" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Multa Rescisória FGTS:</span>
+                <span id="res-multa" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 text-base"
+              >
+                <span class="font-bold text-slate-900"
+                  >Total Bruto Estimado:</span
+                >
+                <span id="res-total" class="font-extrabold text-emerald-600"
+                  >R$ 0,00</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="btn-copiar"
+              onclick="copiarResumo()"
+              class="w-full mt-3 bg-slate-900 hover:bg-slate-950 text-white text-sm font-medium py-2.5 px-4 rounded-lg transition"
+            >
+              Copiar Resumo para WhatsApp
+            </button>
+          </div>
+
+          <div id="historico-recente" class="mt-6 bg-white rounded-xl"></div>
         </div>
+
+        <aside class="md:col-span-5 space-y-6">
+          <div
+            class="bg-white border border-slate-300/90 p-6 rounded-xl shadow-md"
+          >
+            <h3 class="font-display font-bold text-slate-900 mb-3 text-base">
+              Outras Calculadoras Úteis
+            </h3>
+            <ul class="space-y-3 text-sm">
+              <li>
+                <a
+                  href="../horas-extras/index.html"
+                  class="text-rose-600 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Horas Extras</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../financeiro/salario-liquido/index.html"
+                  class="text-rose-600 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Salário Líquido</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../ferias-proporcionais/index.html"
+                  class="text-rose-600 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Férias</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../decimo-terceiro/index.html"
+                  class="text-rose-600 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de 13º Salário</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </main>
 
@@ -172,9 +348,6 @@
           </p>
         </div>
         <div class="flex gap-6 text-xs font-medium">
-          <a href="../../index.html" class="hover:text-white transition"
-            >Início</a
-          >
           <a href="../../sobre.html" class="hover:text-white transition"
             >Sobre</a
           >
@@ -186,5 +359,6 @@
     </footer>
 
     <script src="../../js/rescisao.js"></script>
+    <script src="../../js/app.js"></script>
   </body>
 </html>

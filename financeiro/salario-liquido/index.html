@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calculadora de Salário Líquido 2026 | ContaCerta</title>
+    <title>
+      Calculadora de Salário Líquido 2026 (INSS e IRRF) | ContaCerta
+    </title>
     <meta
       name="description"
-      content="Descubra o valor do seu salário líquido após os descontos oficiais de INSS e IRRF para 2026. Por FM WebDev."
+      content="Calcule seu salário líquido exato para 2026 com os descontos atualizados de INSS, Imposto de Renda e dependentes. Ferramenta por FM WebDev."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,7 +86,7 @@
       </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
       <div class="mb-6">
         <a
           href="../../index.html"
@@ -94,87 +96,211 @@
         </a>
         <span
           class="block text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-md w-fit"
-          >Calculadora Financeira 2026</span
+          >Financeiro & Holerite 2026</span
         >
         <h1
           class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3"
         >
-          Calculadora de Salário Líquido
+          Calculadora de Salário Líquido 2026
         </h1>
         <p class="text-slate-600 mt-1 text-sm sm:text-base">
-          Simule os descontos de INSS e IRRF e descubra o valor exato que cai na
-          sua conta.
+          Descubra quanto sobra no seu bolso após os descontos obrigatórios de
+          INSS e IRRF.
         </p>
       </div>
 
-      <!-- Formulário da Calculadora -->
-      <div
-        class="bg-white border border-slate-300/90 p-6 sm:p-8 rounded-xl shadow-md space-y-6"
-      >
-        <form id="calcForm" class="space-y-4">
-          <div>
-            <label class="block text-sm font-bold text-slate-800 mb-1"
-              >Salário Bruto (R$)</label
-            >
-            <input
-              type="number"
-              id="salarioBruto"
-              step="0.01"
-              required
-              placeholder="Ex: 3500.00"
-              class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
-            />
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-bold text-slate-800 mb-1"
-                >Dependentes (IRRF)</label
-              >
-              <input
-                type="number"
-                id="dependentes"
-                value="0"
-                min="0"
-                required
-                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-bold text-slate-800 mb-1"
-                >Outros Descontos (R$)</label
-              >
-              <input
-                type="number"
-                id="outrosDescontos"
-                step="0.01"
-                value="0"
-                required
-                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg shadow transition"
-          >
-            Calcular Salário Líquido
-          </button>
-        </form>
-
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div
-          id="resultado"
-          class="hidden mt-6 p-5 bg-emerald-50 border border-emerald-200 rounded-lg text-slate-800 space-y-2"
+          class="md:col-span-7 bg-white border border-slate-300/90 border-t-4 border-t-emerald-600 p-6 sm:p-8 rounded-xl shadow-md"
         >
-          <h3 class="font-display font-bold text-lg text-emerald-900">
-            Demonstrativo do Salário:
-          </h3>
-          <p id="resInss" class="text-sm"></p>
-          <p id="resIrrf" class="text-sm"></p>
-          <p
-            id="resLiquido"
-            class="text-lg font-bold text-emerald-950 pt-2 border-t border-emerald-200"
-          ></p>
+          <form id="form-salario-liquido" class="space-y-4">
+            <div>
+              <label
+                for="salario"
+                class="block text-sm font-bold text-slate-800 mb-1"
+                >Salário Bruto Mensal (R$)</label
+              >
+              <input
+                type="text"
+                id="salario"
+                inputmode="numeric"
+                placeholder="Ex: 3.500,00"
+                required
+                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="dependentes"
+                  class="block text-sm font-bold text-slate-800 mb-1"
+                  >Número de Dependentes</label
+                >
+                <input
+                  type="number"
+                  id="dependentes"
+                  min="0"
+                  value="0"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                />
+                <span class="text-[11px] text-slate-500 mt-0.5 block"
+                  >Filhos ou dependentes no IR</span
+                >
+              </div>
+
+              <div>
+                <label
+                  for="outros-descontos"
+                  class="block text-sm font-bold text-slate-800 mb-1"
+                  >Outros Descontos (R$)</label
+                >
+                <input
+                  type="text"
+                  id="outros-descontos"
+                  inputmode="numeric"
+                  placeholder="0,00"
+                  class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                />
+                <span class="text-[11px] text-slate-500 mt-0.5 block"
+                  >VT, plano de saúde, pensão, etc.</span
+                >
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <button
+                type="submit"
+                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-lg transition shadow"
+              >
+                Calcular Salário Líquido
+              </button>
+              <button
+                type="button"
+                onclick="limparFormulario()"
+                class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-lg transition"
+              >
+                Limpar Campos
+              </button>
+            </div>
+          </form>
+
+          <div
+            id="card-resultado"
+            class="hidden mt-6 pt-6 border-t border-slate-200"
+          >
+            <h2 class="font-display text-lg font-bold text-slate-900 mb-3">
+              Resumo do Holerite
+            </h2>
+
+            <div
+              class="space-y-2 text-sm bg-slate-50 p-4 rounded-lg border border-slate-200 text-slate-800"
+            >
+              <div class="flex justify-between">
+                <span class="text-slate-600">Salário Bruto:</span>
+                <span id="res-bruto" class="font-semibold text-slate-900"
+                  >R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Desconto INSS:</span>
+                <span id="res-inss" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600"
+                  >Desconto IRRF (Imposto de Renda):</span
+                >
+                <span id="res-irrf" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-600">Outros Descontos:</span>
+                <span id="res-outros" class="font-semibold text-rose-600"
+                  >- R$ 0,00</span
+                >
+              </div>
+              <div
+                class="flex justify-between pt-2 border-t border-slate-300 text-base"
+              >
+                <span class="font-bold text-slate-900"
+                  >Salário Líquido a Receber:</span
+                >
+                <span id="res-liquido" class="font-extrabold text-emerald-600"
+                  >R$ 0,00</span
+                >
+              </div>
+            </div>
+
+            <button
+              id="btn-copiar"
+              onclick="copiarResumo()"
+              class="w-full mt-3 bg-slate-900 hover:bg-slate-950 text-white text-sm font-medium py-2.5 px-4 rounded-lg transition"
+            >
+              Copiar Resumo para WhatsApp
+            </button>
+          </div>
+
+          <div id="historico-recente" class="mt-6 bg-white rounded-xl"></div>
         </div>
+
+        <aside class="md:col-span-5 space-y-6">
+          <div
+            class="bg-white border border-slate-300/90 p-6 rounded-xl shadow-md"
+          >
+            <h3 class="font-display font-bold text-slate-900 mb-3 text-base">
+              Outras Calculadoras Úteis
+            </h3>
+            <ul class="space-y-3 text-sm">
+              <li>
+                <a
+                  href="../../trabalhista/horas-extras/index.html"
+                  class="text-emerald-700 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Horas Extras</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../trabalhista/ferias-proporcionais/index.html"
+                  class="text-emerald-700 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Férias</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../trabalhista/rescisao-clt/index.html"
+                  class="text-emerald-700 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de Rescisão CLT</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a
+                  href="../../trabalhista/decimo-terceiro/index.html"
+                  class="text-emerald-700 hover:underline flex items-center justify-between font-medium"
+                  ><span>→ Calculadora de 13º Salário</span
+                  ><span
+                    class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
+                    >Ativa</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </main>
 
@@ -192,9 +318,6 @@
           </p>
         </div>
         <div class="flex gap-6 text-xs font-medium">
-          <a href="../../index.html" class="hover:text-white transition"
-            >Início</a
-          >
           <a href="../../sobre.html" class="hover:text-white transition"
             >Sobre</a
           >
@@ -206,5 +329,6 @@
     </footer>
 
     <script src="../../js/salario-liquido.js"></script>
+    <script src="../../js/app.js"></script>
   </body>
 </html>

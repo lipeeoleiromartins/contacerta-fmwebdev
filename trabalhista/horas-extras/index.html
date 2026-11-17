@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Calculadora de Horas Extras e Adicional Noturno 2026 | ContaCerta
-    </title>
+    <title>Calculadora de Horas Extras e Adicional Noturno | ContaCerta</title>
     <meta
       name="description"
       content="Calcule o valor exato das horas extras a 50%, 100% e adicional noturno de forma rápida e gratuita. Por FM WebDev."
@@ -109,91 +107,83 @@
         </p>
       </div>
 
-      <!-- Formulário da Calculadora (Com a estrutura original do seu JS) -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div
           class="md:col-span-7 bg-white border border-slate-300/90 border-t-4 border-t-blue-600 p-6 sm:p-8 rounded-xl shadow-md"
         >
-          <!-- O conteúdo original do formulário entra aqui mantendo os IDs do JS -->
-          <div id="calculadora-container">
-            <!-- Substitua ou garanta que o formulário e os IDs correspondem exatamente ao seu script horas-extras.js -->
-            <form id="calcForm" class="space-y-4">
+          <form id="calcForm" class="space-y-4">
+            <div>
+              <label class="block text-sm font-bold text-slate-800 mb-1"
+                >Salário Bruto (R$)</label
+              >
+              <input
+                type="text"
+                id="salario"
+                inputmode="numeric"
+                required
+                placeholder="Ex: 3.000,00"
+                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-bold text-slate-800 mb-1"
-                  >Salário Bruto (R$)</label
+                  >Jornada Mensal (Horas)</label
                 >
                 <input
-                  type="text"
-                  id="salario"
-                  inputmode="numeric"
-                  placeholder="Ex: 3.000,00"
+                  type="number"
+                  id="jornada"
+                  value="220"
                   required
                   class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-bold text-slate-800 mb-1"
-                    >Jornada Mensal (Horas)</label
-                  >
-                  <input
-                    type="number"
-                    id="jornada"
-                    value="220"
-                    required
-                    class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-bold text-slate-800 mb-1"
-                    >Quantidade de Horas Extras</label
-                  >
-                  <input
-                    type="number"
-                    id="qtdHoras"
-                    step="0.5"
-                    required
-                    placeholder="Ex: 10"
-                    class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  />
-                </div>
-              </div>
               <div>
                 <label class="block text-sm font-bold text-slate-800 mb-1"
-                  >Percentual da Hora Extra</label
+                  >Quantidade de Horas Extras</label
                 >
-                <select
-                  id="percentual"
+                <input
+                  type="number"
+                  id="qtdHoras"
+                  step="0.5"
+                  required
+                  placeholder="Ex: 10"
                   class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                >
-                  <option value="50">50% (Dias úteis / Sábados)</option>
-                  <option value="100">100% (Domingos e Feriados)</option>
-                </select>
+                />
               </div>
-              <button
-                type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition"
-              >
-                Calcular Horas Extras
-              </button>
-            </form>
-
-            <div
-              id="resultado"
-              class="hidden mt-6 p-5 bg-blue-50 border border-blue-200 rounded-lg text-slate-800 space-y-2"
-            >
-              <h3 class="font-display font-bold text-lg text-blue-900">
-                Resultado da Simulação:
-              </h3>
-              <p id="resValorHora" class="text-sm"></p>
-              <p id="resTotal" class="text-base font-bold text-blue-950"></p>
             </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-800 mb-1"
+                >Percentual da Hora Extra</label
+              >
+              <select
+                id="percentual"
+                class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+              >
+                <option value="50">50% (Dias úteis / Sábados)</option>
+                <option value="100">100% (Domingos e Feriados)</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow transition"
+            >
+              Calcular Horas Extras
+            </button>
+          </form>
+
+          <div
+            id="resultado"
+            class="hidden mt-6 p-5 bg-blue-50 border border-blue-200 rounded-lg text-slate-800 space-y-2"
+          >
+            <h3 class="font-display font-bold text-lg text-blue-900">
+              Resultado da Simulação:
+            </h3>
+            <p id="resValorHora" class="text-sm"></p>
+            <p id="resTotal" class="text-base font-bold text-blue-950"></p>
           </div>
 
-          <!-- Histórico Recente -->
-          <div id="historico-recente" class="mt-6 bg-white rounded-xl">
-            <!-- Preenchido via JavaScript se houver -->
-          </div>
+          <div id="historico-recente" class="mt-6 bg-white rounded-xl"></div>
         </div>
 
         <aside class="md:col-span-5 space-y-6">
@@ -208,69 +198,50 @@
                 <a
                   href="../../financeiro/salario-liquido/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between font-medium"
-                >
-                  <span>→ Calculadora de Salário Líquido</span>
-                  <span
+                  ><span>→ Calculadora de Salário Líquido</span
+                  ><span
                     class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
                     >Ativa</span
-                  >
-                </a>
+                  ></a
+                >
               </li>
               <li>
                 <a
                   href="../ferias-proporcionais/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between font-medium"
-                >
-                  <span>→ Calculadora de Férias</span>
-                  <span
+                  ><span>→ Calculadora de Férias</span
+                  ><span
                     class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
                     >Ativa</span
-                  >
-                </a>
+                  ></a
+                >
               </li>
               <li>
                 <a
                   href="../rescisao-clt/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between font-medium"
-                >
-                  <span>→ Calculadora de Rescisão CLT</span>
-                  <span
+                  ><span>→ Calculadora de Rescisão CLT</span
+                  ><span
                     class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
                     >Ativa</span
-                  >
-                </a>
+                  ></a
+                >
               </li>
               <li>
                 <a
                   href="../decimo-terceiro/index.html"
                   class="text-blue-700 hover:underline flex items-center justify-between font-medium"
-                >
-                  <span>→ Calculadora de 13º Salário</span>
-                  <span
+                  ><span>→ Calculadora de 13º Salário</span
+                  ><span
                     class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full"
                     >Ativa</span
-                  >
-                </a>
+                  ></a
+                >
               </li>
             </ul>
           </div>
         </aside>
       </div>
-
-      <article
-        id="como-calcular"
-        class="mt-12 bg-white border border-slate-300/90 p-6 md:p-8 rounded-xl shadow-md"
-      >
-        <h2 class="font-display text-xl font-extrabold text-slate-900 mb-3">
-          Como calcular as Horas Extras?
-        </h2>
-        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
-          O cálculo da hora extra baseia-se no valor da sua hora normal de
-          trabalho, multiplicada pelo percentual de acréscimo legal (mínimo de
-          50% para dias úteis e 100% para domingos e feriados) ou adicional
-          noturno correspondente.
-        </p>
-      </article>
     </main>
 
     <!-- Rodapé Unificado -->
