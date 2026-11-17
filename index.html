@@ -17,475 +17,250 @@
     ></script>
   </head>
   <body
-    class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen selection:bg-emerald-100 selection:text-emerald-900"
+    class="bg-white text-slate-900 font-sans antialiased flex flex-col min-h-screen"
   >
-    <!-- Cabeçalho Glassmorphism Claro -->
-    <header
-      class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50"
-    >
+    <!-- Cabeçalho Corporativo Tradicional -->
+    <header class="bg-slate-900 text-white border-b border-slate-800">
       <div
-        class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center"
+        class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center"
       >
-        <a href="index.html" class="flex items-center gap-2.5 group">
-          <div
-            class="bg-emerald-600 text-white p-2 rounded-xl shadow-sm shadow-emerald-600/20 group-hover:bg-emerald-700 transition"
+        <a href="index.html" class="flex flex-col">
+          <span class="text-xl font-bold tracking-tight">ContaCerta</span>
+          <span
+            class="text-[10px] text-slate-400 uppercase tracking-widest font-mono"
+            >FM WebDev</span
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2.2"
-                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-          <div class="flex flex-col">
-            <span class="text-xl font-extrabold tracking-tight text-slate-900"
-              >Conta<span class="text-emerald-600">Certa</span></span
-            >
-            <span
-              class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest"
-              >por FM WebDev</span
-            >
-          </div>
         </a>
-        <nav
-          class="flex items-center space-x-1 sm:space-x-2 text-sm font-medium"
-        >
+        <nav class="space-x-6 text-sm font-medium">
           <a
             href="sobre.html"
-            class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/70 transition"
+            class="text-slate-300 hover:text-white transition"
             >Sobre</a
           >
           <a
             href="privacidade.html"
-            class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/70 transition"
+            class="text-slate-300 hover:text-white transition"
             >Privacidade</a
+          >
+          <a
+            href="termos.html"
+            class="text-slate-300 hover:text-white transition"
+            >Termos</a
           >
         </nav>
       </div>
     </header>
 
-    <!-- Hero Section com Fundo Sutil em Grade -->
-    <section
-      class="relative bg-white border-b border-slate-200/80 overflow-hidden"
-    >
-      <div
-        class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-60"
-      ></div>
-      <div
-        class="relative max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center"
-      >
-        <div
-          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold mb-6 shadow-sm"
+    <!-- Seção de Título Limpa e Alinhada -->
+    <section class="bg-slate-100 border-b border-slate-200 py-12">
+      <div class="max-w-5xl mx-auto px-4">
+        <span
+          class="text-xs font-semibold text-blue-700 uppercase tracking-wider bg-blue-50 border border-blue-200 px-2.5 py-1 rounded"
+          >Atualizado para 2026</span
         >
-          <span
-            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
-          ></span>
-          Tabelas e Regras CLT Atualizadas 2026
-        </div>
         <h1
-          class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] max-w-3xl mx-auto"
+          class="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 tracking-tight"
         >
-          Cálculos trabalhistas e financeiros
-          <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600"
-            >sem complicação</span
-          >
+          Calculadoras Trabalhistas e Financeiras
         </h1>
-        <p
-          class="text-slate-600 mt-5 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
-        >
-          Simule seus direitos, confira os descontos do seu holerite e planeje
-          seu orçamento em segundos com nossas ferramentas gratuitas.
+        <p class="text-slate-600 mt-2 text-base max-w-2xl">
+          Ferramentas de simulação de direitos CLT, holerite, férias e rescisão
+          para suporte ao trabalhador.
         </p>
       </div>
     </section>
 
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12 flex-grow w-full">
-      <!-- Grid de Calculadoras -->
-      <section class="mb-16">
+    <main class="max-w-5xl mx-auto px-4 py-10 flex-grow w-full">
+      <!-- Grid de Ferramentas -->
+      <section class="mb-14">
         <div
-          class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-8"
+          class="border-b border-slate-200 pb-3 mb-6 flex justify-between items-end"
         >
-          <div>
-            <h2 class="text-lg font-bold text-slate-900">
-              Simuladores Disponíveis
-            </h2>
-            <p class="text-xs text-slate-500">
-              Selecione uma ferramenta abaixo para iniciar o cálculo
-              gratuitamente
-            </p>
-          </div>
-          <span
-            class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-white border border-slate-200 px-3 py-1 rounded-full w-fit shadow-sm"
+          <h2
+            class="text-base font-bold text-slate-900 uppercase tracking-wider"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            5 ferramentas ativas
-          </span>
+            Simuladores Disponíveis
+          </h2>
+          <span class="text-xs text-slate-500 font-mono">5 ferramentas</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Cartão 1: Horas Extras -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Item 1 -->
           <div
-            class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white border border-slate-200 p-5 rounded-lg hover:border-slate-400 transition flex flex-col justify-between"
           >
             <div>
-              <div class="flex justify-between items-start mb-5">
-                <div
-                  class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2.5 py-0.5 rounded-full"
-                  >Gratuito</span
-                >
+              <div class="text-xs font-semibold text-blue-600 mb-1 font-mono">
+                CLT / JORNADA
               </div>
-              <h3
-                class="font-bold text-slate-900 text-lg group-hover:text-emerald-700 transition-colors"
-              >
+              <h3 class="font-bold text-slate-900 text-base">
                 Horas Extras e Noturno
               </h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Calcule o valor exato das horas extras a 50%, 100% e o adicional
-                noturno de 20%.
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                Cálculo de horas extras a 50%, 100% e adicional noturno de 20%.
               </p>
             </div>
             <a
               href="trabalhista/horas-extras/index.html"
-              class="mt-6 pt-4 border-t border-slate-100 text-sm font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center justify-between w-full"
+              class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-blue-700 hover:underline block"
             >
-              <span>Acessar calculadora</span>
-              <span class="group-hover:translate-x-1 transition-transform"
-                >→</span
-              >
+              Acessar simulador →
             </a>
           </div>
 
-          <!-- Cartão 2: Salário Líquido -->
+          <!-- Item 2 -->
           <div
-            class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white border border-slate-200 p-5 rounded-lg hover:border-slate-400 transition flex flex-col justify-between"
           >
             <div>
-              <div class="flex justify-between items-start mb-5">
-                <div
-                  class="p-3 bg-emerald-50 text-emerald-600 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2.5 py-0.5 rounded-full"
-                  >Gratuito</span
-                >
+              <div class="text-xs font-semibold text-blue-600 mb-1 font-mono">
+                FINANCEIRO
               </div>
-              <h3
-                class="font-bold text-slate-900 text-lg group-hover:text-emerald-700 transition-colors"
-              >
+              <h3 class="font-bold text-slate-900 text-base">
                 Salário Líquido 2026
               </h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Descubra quanto sobra no bolso após os descontos oficiais de
-                INSS e IRRF.
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                Simulação de descontos oficiais de INSS e IRRF sobre o salário
+                bruto.
               </p>
             </div>
             <a
               href="financeiro/salario-liquido/index.html"
-              class="mt-6 pt-4 border-t border-slate-100 text-sm font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center justify-between w-full"
+              class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-blue-700 hover:underline block"
             >
-              <span>Acessar calculadora</span>
-              <span class="group-hover:translate-x-1 transition-transform"
-                >→</span
-              >
+              Acessar simulador →
             </a>
           </div>
 
-          <!-- Cartão 3: Férias Proporcionais -->
+          <!-- Item 3 -->
           <div
-            class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white border border-slate-200 p-5 rounded-lg hover:border-slate-400 transition flex flex-col justify-between"
           >
             <div>
-              <div class="flex justify-between items-start mb-5">
-                <div
-                  class="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-500 group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2.5 py-0.5 rounded-full"
-                  >Gratuito</span
-                >
+              <div class="text-xs font-semibold text-blue-600 mb-1 font-mono">
+                BENEFÍCIOS
               </div>
-              <h3
-                class="font-bold text-slate-900 text-lg group-hover:text-emerald-700 transition-colors"
-              >
+              <h3 class="font-bold text-slate-900 text-base">
                 Férias Proporcionais
               </h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Simule o valor das suas férias com adicional de 1/3 e opção de
-                abono pecuniário.
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                Cálculo de férias com adicional constitucional de 1/3 e abono
+                pecuniário.
               </p>
             </div>
             <a
               href="trabalhista/ferias-proporcionais/index.html"
-              class="mt-6 pt-4 border-t border-slate-100 text-sm font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center justify-between w-full"
+              class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-blue-700 hover:underline block"
             >
-              <span>Acessar calculadora</span>
-              <span class="group-hover:translate-x-1 transition-transform"
-                >→</span
-              >
+              Acessar simulador →
             </a>
           </div>
 
-          <!-- Cartão 4: Rescisão Trabalhista -->
+          <!-- Item 4 -->
           <div
-            class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white border border-slate-200 p-5 rounded-lg hover:border-slate-400 transition flex flex-col justify-between"
           >
             <div>
-              <div class="flex justify-between items-start mb-5">
-                <div
-                  class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2.5 py-0.5 rounded-full"
-                  >Gratuito</span
-                >
+              <div class="text-xs font-semibold text-blue-600 mb-1 font-mono">
+                RESCISÃO
               </div>
-              <h3
-                class="font-bold text-slate-900 text-lg group-hover:text-emerald-700 transition-colors"
-              >
+              <h3 class="font-bold text-slate-900 text-base">
                 Rescisão Trabalhista
               </h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Simule os valores de demissão sem justa causa, pedido de
-                demissão ou acordo.
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                Simulação de verbas rescisórias para demissão, pedido ou acordo.
               </p>
             </div>
             <a
               href="trabalhista/rescisao-clt/index.html"
-              class="mt-6 pt-4 border-t border-slate-100 text-sm font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center justify-between w-full"
+              class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-blue-700 hover:underline block"
             >
-              <span>Acessar calculadora</span>
-              <span class="group-hover:translate-x-1 transition-transform"
-                >→</span
-              >
+              Acessar simulador →
             </a>
           </div>
 
-          <!-- Cartão 5: 13º Salário -->
+          <!-- Item 5 -->
           <div
-            class="bg-white border border-slate-200/90 p-6 rounded-2xl hover:border-emerald-500/60 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            class="bg-white border border-slate-200 p-5 rounded-lg hover:border-slate-400 transition flex flex-col justify-between"
           >
             <div>
-              <div class="flex justify-between items-start mb-5">
-                <div
-                  class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </div>
-                <span
-                  class="text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 px-2.5 py-0.5 rounded-full"
-                  >Gratuito</span
-                >
+              <div class="text-xs font-semibold text-blue-600 mb-1 font-mono">
+                BENEFÍCIOS
               </div>
-              <h3
-                class="font-bold text-slate-900 text-lg group-hover:text-emerald-700 transition-colors"
-              >
-                13º Salário
-              </h3>
-              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Calcule com precisão o valor da 1ª e 2ª parcela do seu décimo
-                terceiro proporcional.
+              <h3 class="font-bold text-slate-900 text-base">13º Salário</h3>
+              <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                Cálculo proporcional da 1ª e 2ª parcela do décimo terceiro
+                salário.
               </p>
             </div>
             <a
               href="trabalhista/decimo-terceiro/index.html"
-              class="mt-6 pt-4 border-t border-slate-100 text-sm font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center justify-between w-full"
+              class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-blue-700 hover:underline block"
             >
-              <span>Acessar calculadora</span>
-              <span class="group-hover:translate-x-1 transition-transform"
-                >→</span
-              >
+              Acessar simulador →
             </a>
           </div>
         </div>
       </section>
 
-      <!-- Artigo Editorial SEO -->
+      <!-- Artigo Editorial Informativo (SEO AdSense) -->
       <article
-        class="bg-white border border-slate-200/90 p-8 sm:p-10 rounded-2xl shadow-sm space-y-5 text-slate-700 text-sm sm:text-base leading-relaxed"
+        class="bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-lg space-y-4 text-slate-700 text-sm leading-relaxed"
       >
-        <div
-          class="inline-block text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-md"
-        >
-          Guia Trabalhista & Financeiro
-        </div>
-        <h2 class="text-2xl font-extrabold text-slate-900">
-          Por que utilizar o ContaCerta para suas simulações financeiras?
+        <h2 class="text-lg font-bold text-slate-900">
+          Sobre os Cálculos Trabalhistas no Brasil
         </h2>
         <p>
-          O <strong>ContaCerta</strong> foi desenvolvido com o objetivo de
-          oferecer estimativas rápidas, transparentes e de fácil acesso para
-          trabalhadores brasileiros sob o regime da CLT. Em um mercado de
-          trabalho dinâmico, compreender os descontos do holerite, calcular
-          horas extras trabalhadas em feriados ou planejar o orçamento anual com
-          o décimo terceiro e férias é fundamental para a saúde financeira.
+          O <strong>ContaCerta</strong> é um portal independente voltado à
+          transparência e ao auxílio no planeamento financeiro de trabalhadores
+          regidos pela Consolidação das Leis do Trabalho (CLT). As ferramentas
+          utilizam as fórmulas padronizadas de cálculo de proventos e descontos
+          obrigatórios.
         </p>
-        <h3 class="text-lg font-bold text-slate-900 pt-2">
-          Principais Direitos Trabalhistas Garantidos pela CLT
-        </h3>
-        <ul class="space-y-3 text-slate-600">
-          <li class="flex items-start gap-2.5">
-            <span class="text-emerald-600 font-bold mt-0.5">✓</span>
-            <span
-              ><strong class="text-slate-800"
-                >Salário Líquido Atualizado:</strong
-              >
-              Descontos progressivos de INSS e Imposto de Renda Retido na Fonte
-              (IRRF) calculados com base nas tabelas vigentes.</span
-            >
+        <h3 class="font-bold text-slate-900 pt-2">Direitos e Diretrizes</h3>
+        <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+          <li>
+            <strong>Tabelas Vigentes:</strong> Descontos calculados com base nas
+            alíquotas progressivas oficiais de INSS e Imposto de Renda.
           </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-emerald-600 font-bold mt-0.5">✓</span>
-            <span
-              ><strong class="text-slate-800"
-                >Horas Extras e Adicional Noturno:</strong
-              >
-              Remuneração diferenciada para jornadas que ultrapassam a carga
-              horária padrão ou realizadas entre as 22h e as 5h.</span
-            >
+          <li>
+            <strong>Jornada e Horas Extras:</strong> Diretrizes para apuração de
+            sobrejornada e adicionais noturnos conforme a legislação laboral.
           </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-emerald-600 font-bold mt-0.5">✓</span>
-            <span
-              ><strong class="text-slate-800"
-                >Férias e Abono Pecuniário:</strong
-              >
-              O direito constitucional a 30 dias de descanso remunerado
-              acrescido de 1/3, com possibilidade legal de converter 10 dias em
-              abono pecuniário (venda de dias).</span
-            >
-          </li>
-          <li class="flex items-start gap-2.5">
-            <span class="text-emerald-600 font-bold mt-0.5">✓</span>
-            <span
-              ><strong class="text-slate-800"
-                >Rescisão e Verbas Rescisórias:</strong
-              >
-              Direitos devidos em caso de demissão sem justa causa, pedido de
-              demissão ou acordo mútuo conforme o artigo 484-A da CLT.</span
-            >
+          <li>
+            <strong>Verbas Rescisórias:</strong> Estimativas baseadas nas
+            modalidades de rescisão contratual previstas em lei.
           </li>
         </ul>
-        <p class="text-xs text-slate-500 pt-5 border-t border-slate-100">
+        <p class="text-xs text-slate-500 pt-3 border-t border-slate-200">
           <em
-            >Aviso Legal: As ferramentas do ContaCerta possuem caráter
-            estritamente educativo e informativo, servindo como base de
-            planejamento, não substituindo os cálculos oficiais do departamento
-            pessoal da sua empresa ou do Ministério do Trabalho.</em
+            >Aviso: Os resultados exibidos têm caráter meramente informativo e
+            de simulação de planeamento, não substituindo os documentos oficiais
+            emitidos pelo empregador.</em
           >
         </p>
       </article>
     </main>
 
-    <!-- Footer Corporativo -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-12 mt-16">
+    <!-- Rodapé Corporativo Sóbrio -->
+    <footer
+      class="bg-slate-900 text-slate-400 text-xs py-8 mt-12 border-t border-slate-800"
+    >
       <div
-        class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-6"
+        class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4"
       >
-        <div class="text-center md:text-left">
-          <span class="text-base font-extrabold text-white tracking-tight"
-            >Conta<span class="text-emerald-400">Certa</span></span
-          >
-          <p class="mt-1">
-            © 2026 ContaCerta — Desenvolvido por
-            <strong class="text-slate-200">FM WebDev</strong>.
-          </p>
-          <p class="text-[11px] text-slate-500 mt-1">
-            Plataforma independente de simulações financeiras e trabalhistas.
+        <div>
+          <p class="font-bold text-white">ContaCerta</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">
+            Desenvolvido por FM WebDev © 2026
           </p>
         </div>
-        <div class="flex flex-wrap justify-center gap-6 font-medium">
-          <a href="sobre.html" class="hover:text-emerald-400 transition"
-            >Sobre</a
+        <div class="space-x-4">
+          <a href="sobre.html" class="hover:text-white transition">Sobre</a>
+          <a href="privacidade.html" class="hover:text-white transition"
+            >Privacidade</a
           >
-          <a href="privacidade.html" class="hover:text-emerald-400 transition"
-            >Política de Privacidade</a
-          >
-          <a href="termos.html" class="hover:text-emerald-400 transition"
+          <a href="termos.html" class="hover:text-white transition"
             >Termos de Uso</a
           >
         </div>
