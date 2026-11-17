@@ -8,7 +8,27 @@
       name="description"
       content="Termos e condições de utilização das ferramentas e calculadoras do portal ContaCerta."
     />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1528458304720306"
@@ -16,63 +36,88 @@
     ></script>
   </head>
   <body
-    class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen"
+    class="bg-slate-200/75 text-slate-900 font-sans antialiased flex flex-col min-h-screen"
   >
-    <header class="bg-blue-700 text-white shadow-md">
+    <!-- Cabeçalho Unificado -->
+    <header
+      class="bg-slate-950 text-white border-b border-slate-800 sticky top-0 z-50"
+    >
       <div
-        class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center"
+        class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center"
       >
-        <a
-          href="index.html"
-          class="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2"
-        >
-          <span class="text-xl font-bold tracking-tight"
-            >Conta<span class="text-blue-200">Certa</span></span
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div
+            class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center font-display font-extrabold text-white text-lg shadow-inner group-hover:bg-blue-500 transition"
           >
-          <span
-            class="text-[11px] font-medium text-blue-200 bg-blue-800/60 px-2 py-0.5 rounded w-fit"
-            >por FM WebDev</span
-          >
+            C
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-display text-xl font-extrabold tracking-tight leading-none"
+              >Conta<span class="text-blue-400">Certa</span></span
+            >
+            <span
+              class="text-[10px] text-slate-400 uppercase tracking-widest mt-1"
+              >FM WebDev</span
+            >
+          </div>
         </a>
-        <nav class="space-x-4 text-sm font-medium">
-          <a href="index.html" class="hover:underline">Início</a>
-          <a href="sobre.html" class="hover:underline">Sobre</a>
+        <nav
+          class="flex items-center space-x-2 sm:space-x-6 text-sm font-medium"
+        >
+          <a
+            href="index.html"
+            class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/80 transition"
+            >Início</a
+          >
+          <a
+            href="sobre.html"
+            class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/80 transition"
+            >Sobre</a
+          >
+          <a
+            href="privacidade.html"
+            class="px-3 py-1.5 rounded-md text-slate-300 hover:text-white hover:bg-slate-800/80 transition"
+            >Privacidade</a
+          >
         </nav>
       </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
       <div class="mb-6">
         <span
-          class="text-xs font-semibold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-1 rounded"
+          class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-md"
           >Legal & Condições</span
         >
-        <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-2">
+        <h1
+          class="font-display text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3"
+        >
           Termos de Uso
         </h1>
-        <p class="text-slate-600 mt-1 text-sm md:text-base">
+        <p class="text-slate-600 mt-1 text-sm sm:text-base">
           Condições gerais para utilização das calculadoras e conteúdos do
           ContaCerta.
         </p>
       </div>
 
       <article
-        class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200 space-y-4 text-slate-700 text-sm md:text-base leading-relaxed"
+        class="bg-white border border-slate-300/90 p-6 sm:p-10 rounded-xl shadow-md space-y-5 text-slate-800 text-base leading-relaxed"
       >
-        <h2 class="text-xl font-bold text-slate-900">
+        <h2 class="font-display text-xl font-extrabold text-slate-900">
           1. Aceitação dos Termos
         </h2>
-        <p>
+        <p class="text-slate-700">
           Ao aceder e utilizar o portal <strong>ContaCerta</strong>, concorda
           expressamente em cumprir e ficar vinculado aos presentes Termos de
           Uso. Caso não concorde com qualquer parte destes termos, recomendamos
           que interrompa imediatamente a utilização do website.
         </p>
 
-        <h3 class="text-lg font-bold text-slate-900 pt-2">
+        <h3 class="font-display text-lg font-bold text-slate-900 pt-2">
           2. Caráter Informativo e Educativo
         </h3>
-        <p>
+        <p class="text-slate-700">
           Todas as calculadoras, simuladores e artigos disponíveis no ContaCerta
           possuem
           <strong
@@ -84,54 +129,54 @@
           humanos da sua empresa, contadores ou órgãos oficiais.
         </p>
 
-        <h3 class="text-lg font-bold text-slate-900 pt-2">
+        <h3 class="font-display text-lg font-bold text-slate-900 pt-2">
           3. Isenção de Responsabilidade
         </h3>
-        <p>
+        <p class="text-slate-700">
           O desenvolvedor e mantenedor (<strong>FM WebDev</strong>) não se
           responsabiliza por decisões financeiras, trabalhistas ou acordos
           contratuais tomados com base exclusiva nos resultados obtidos através
           das simulações do portal.
         </p>
 
-        <h3 class="text-lg font-bold text-slate-900 pt-2">
+        <h3 class="font-display text-lg font-bold text-slate-900 pt-2">
           4. Propriedade Intelectual
         </h3>
-        <p>
+        <p class="text-slate-700">
           Todo o design, código-fonte, estrutura de páginas, logótipos e
           conteúdos textuais do ContaCerta são protegidos por leis de
           propriedade intelectual. É proibida a reprodução, cópia ou
           distribuição comercial não autorizada do material aqui contido.
         </p>
 
-        <div class="pt-4 border-t border-slate-100">
+        <div class="pt-6 border-t border-slate-200">
           <a
             href="index.html"
-            class="inline-flex items-center gap-1 text-blue-700 font-bold hover:underline text-sm"
+            class="inline-flex items-center gap-2 text-blue-700 font-bold hover:underline text-sm"
           >
-            ← Voltar para a página inicial
+            <span>← Voltar para a página inicial</span>
           </a>
         </div>
       </article>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 mt-12 mb-10">
+    <!-- Rodapé Unificado -->
+    <footer
+      class="bg-slate-950 text-slate-300 text-sm py-10 mt-12 border-t border-slate-800"
+    >
       <div
-        class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4"
+        class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4"
       >
-        <div class="text-center md:text-left">
-          <p>
-            © 2026 ContaCerta — Desenvolvido por
-            <strong class="text-white">FM WebDev</strong>.
-          </p>
-          <p class="text-[11px] text-slate-500 mt-1">
-            Plataforma independente de simulações financeiras e trabalhistas.
+        <div class="text-center sm:text-left">
+          <p class="font-display font-bold text-white text-base">ContaCerta</p>
+          <p class="text-xs text-slate-400 mt-1">
+            Desenvolvido por FM WebDev © 2026 • Todos os direitos reservados.
           </p>
         </div>
-        <div class="space-x-4">
-          <a href="index.html" class="hover:text-white">Início</a>
-          <a href="sobre.html" class="hover:text-white">Sobre</a>
-          <a href="privacidade.html" class="hover:text-white"
+        <div class="flex gap-6 text-xs font-medium">
+          <a href="index.html" class="hover:text-white transition">Início</a>
+          <a href="sobre.html" class="hover:text-white transition">Sobre</a>
+          <a href="privacidade.html" class="hover:text-white transition"
             >Política de Privacidade</a
           >
         </div>
